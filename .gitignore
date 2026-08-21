@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Imagens originais de câmera (276 MB). O site e os e-mails usam apenas
+# as versões otimizadas em assets/web, geradas a partir destas.
+assets/hero/
+assets/products/
+
+# Capturas de tela de rascunho na raiz
+shot-*.png
+crop-*.png
+
+# Sistema
+Thumbs.db
+.DS_Store

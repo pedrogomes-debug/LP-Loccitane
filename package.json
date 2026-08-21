@@ -1,0 +1,21 @@
+{
+  "name": "loccitane-reve-landing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "emails:imagens": "node emails/preparar-imagens.mjs",
+    "emails:build": "node emails/build.mjs",
+    "emails:preview": "node emails/screenshots.mjs",
+    "emails:aprovar": "start emails/dist/preview/index.html",
+    "emails": "npm run emails:imagens && npm run emails:build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "puppeteer": "^25.7.0",
+    "sharp": "^0.35.3"
+  }
+}

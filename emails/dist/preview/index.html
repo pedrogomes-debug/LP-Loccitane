@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aprovação — E-mails da jornada de revenda</title>
+<style>
+  :root { --red:#C02031; --ink:#2B1A13; --muted:#6E564A; --line:#E7D8C8; --cream:#FBF1E6; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 24px 64px; background:#F7F0E8; color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-size:1.9rem; margin:0 0 .3rem; color:var(--red); }
+  h2 { font-size:1.15rem; margin:2.5rem 0 .9rem; }
+  .intro { color:var(--muted); max-width:70ch; margin:0 0 .4rem; }
+  .cartoes { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .cartao { display:block; background:#fff; border:1px solid var(--line); border-radius:12px;
+    overflow:hidden; text-decoration:none; color:inherit; transition:transform .15s, box-shadow .15s; }
+  .cartao:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(88,40,25,.14); }
+  .cartao img { display:block; width:100%; height:110px; object-fit:cover; }
+  .cartao__corpo { padding:12px 14px; }
+  .cartao__corpo strong { display:block; color:var(--red); }
+  .cartao__corpo span { font-size:.88rem; color:var(--muted); }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);
+    vertical-align:top; font-size:.9rem; }
+  th { background:var(--cream); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); }
+  tr:last-child td { border-bottom:0; }
+  .num { color:var(--muted); font-variant-numeric:tabular-nums; }
+  code { font-size:.78rem; background:var(--cream); padding:2px 6px; border-radius:5px; }
+  .meta { display:block; margin-top:5px; font-size:.78rem; color:var(--muted); }
+  .rotulo { display:block; margin-top:9px; font-size:.7rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); }
+  .rotulo:first-child { margin-top:0; }
+  .contagem { display:block; font-size:.76rem; color:var(--muted); }
+  .contagem--alerta { color:#B4551A; font-weight:600; }
+  .acoes { white-space:nowrap; }
+  .acoes a { display:block; font-size:.85rem; color:var(--red); }
+  .botao { display:inline-block !important; margin-bottom:8px; padding:8px 14px; border-radius:999px;
+    background:var(--red); color:#fff !important; text-decoration:none; font-weight:600; }
+  .nota { margin-top:2rem; padding:14px 16px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; font-size:.86rem; color:var(--muted); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>E-mails da jornada de revenda</h1>
+    <p class="intro">Versão local para aprovação: as imagens são carregadas do disco
+      (<code>emails/assets</code>) e os links de CTA apontam para a URL configurada em
+      <code>emails/conteudo.mjs</code>.</p>
+    <p class="intro">A régua de 14/08 tem 5 momentos com dois assuntos cada. O assunto A vai para
+      quem abriu o e-mail anterior e o B para quem não abriu — a peça é a mesma nos dois casos.</p>
+
+    <h2>Os 7 criativos</h2>
+    <div class="cartoes">
+      <a class="cartao" href="criativos/e1-apresentacao.html">
+        <img src="../../assets/hero-apresentacao.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E1 — Apresentação</strong>
+          <span>Bem-vinda ao universo L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/e2-reforco.html">
+        <img src="../../assets/hero-marca.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E2 — Reforço</strong>
+          <span>Renda extra com produtos premiados e clientes fiéis à marca</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/e3-beneficio.html">
+        <img src="../../assets/hero-beneficio.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E3 — Benefício</strong>
+          <span>As vantagens de revender L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/e3-calculadora.html">
+        <img src="../../assets/hero-calculadora.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E3 — Calculadora</strong>
+          <span>Faça a conta antes de começar</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/e4-prova-social.html">
+        <img src="../../assets/hero-prova-social.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E4 — Prova Social</strong>
+          <span>Quem já vende conta como começou</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/e5-overview-do-programa.html">
+        <img src="../../assets/hero-overview.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E5 — Overview do Programa</strong>
+          <span>Comece agora a sua revenda L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="criativos/confirmacao-de-cadastro.html">
+        <img src="../../assets/hero-confirmacao.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>Confirmação de cadastro</strong>
+          <span>Bem-vinda ao Programa de Revendedoras L'Occitane au Brésil!</span>
+        </div>
+      </a>
+    </div>
+
+    <h2>Régua de 14/08 — 10 disparos em 5 momentos</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Código do template</th><th>Gatilho</th><th>Textos do disparo</th><th>Peça</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><code>LOCCITANE_LP_M1_A</code><span class="meta">M1 — Convite (assunto A)<br />E1 — Apresentação &middot; D+0</span></td>
+          <td>Todos os leads da base entram por aqui</td>
+          <td>
+            <span class="rotulo">Assunto</span>Revenda brasilidade com nosso Programa de Revendedoras L'Occitane au Brésil!
+            <span class="contagem contagem--alerta">76 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>Bem-vinda ao universo L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Cadastro sem custo, frete grátis e desconto de 20% a 35% em cada compra.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/01-m1-convite-a.html">Abrir peça</a>
+            <a href="../por-momento/01-m1-convite-a.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><code>LOCCITANE_LP_M1_B</code><span class="meta">M1 — Convite (assunto B, peça E1.1)<br />E1 — Apresentação &middot; D+0</span></td>
+          <td>Não abriu o E1: mesmo conteúdo, assunto novo</td>
+          <td>
+            <span class="rotulo">Assunto</span>Empreender e lucrar com produtos que encantam pode começar hoje!
+            <span class="contagem">64 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Uma oportunidade da L'Occitane au Brésil está esperando por você
+            <span class="rotulo">Preheader</span>Compre com desconto, venda pelo preço da revista e fique com a diferença.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/02-m1-convite-b.html">Abrir peça</a>
+            <a href="../por-momento/02-m1-convite-b.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><code>LOCCITANE_LP_M2_A</code><span class="meta">M2 — Benefícios (assunto A)<br />E3 — Benefício &middot; D+3</span></td>
+          <td>Abriu o M1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Lucre com produtos que as pessoas já amam: revenda L'Occitane au Brésil
+            <span class="contagem contagem--alerta">71 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>As vantagens de revender L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Do 20% no primeiro pedido ao 35% no nível diamante: veja a régua completa.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/03-m2-beneficios-a.html">Abrir peça</a>
+            <a href="../por-momento/03-m2-beneficios-a.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><code>LOCCITANE_LP_M2_B</code><span class="meta">M2 — Benefícios (assunto B)<br />E3 — Benefício &middot; D+3</span></td>
+          <td>Não abriu o M1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Ainda dá tempo de começar a sua revenda L'Occitane au Brésil
+            <span class="contagem">60 caracteres</span>
+            <span class="rotulo">Título (H1)</span>O melhor momento para empreender com beleza é agora
+            <span class="rotulo">Preheader</span>Dá para começar com R$ 360, sem CNPJ e sem meta obrigatória todo mês.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/04-m2-beneficios-b.html">Abrir peça</a>
+            <a href="../por-momento/04-m2-beneficios-b.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td><code>LOCCITANE_LP_M3_A</code><span class="meta">M3 — Calculadora (assunto A)<br />E3 — Calculadora &middot; D+5</span></td>
+          <td>Abriu o M2</td>
+          <td>
+            <span class="rotulo">Assunto</span>Simule quanto você ganha revendendo L'Occitane au Brésil
+            <span class="contagem">56 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Faça a conta antes de começar
+            <span class="rotulo">Preheader</span>Coloque o valor que pretende comprar e veja o seu lucro na hora.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/05-m3-calculadora-a.html">Abrir peça</a>
+            <a href="../por-momento/05-m3-calculadora-a.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td><code>LOCCITANE_LP_M3_B</code><span class="meta">M3 — Calculadora (assunto B)<br />E3 — Calculadora &middot; D+5</span></td>
+          <td>Não abriu o M2</td>
+          <td>
+            <span class="rotulo">Assunto</span>Quanto sobra para você em cada venda? Faça a conta
+            <span class="contagem">50 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Quanto dá para ganhar por mês?
+            <span class="rotulo">Preheader</span>A calculadora mostra por quanto revender e quanto fica com você.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/06-m3-calculadora-b.html">Abrir peça</a>
+            <a href="../por-momento/06-m3-calculadora-b.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td><code>LOCCITANE_LP_M4_A</code><span class="meta">M4 — Prova Social (assunto A)<br />E4 — Prova Social &middot; D+7</span></td>
+          <td>Abriu o M3</td>
+          <td>
+            <span class="rotulo">Assunto</span>Revendedoras L'Occitane au Brésil contam como começaram
+            <span class="contagem">55 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Quem já vende conta como começou
+            <span class="rotulo">Preheader</span>Três histórias de quem começou com uma primeira compra de R$ 360.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/07-m4-prova-social-a.html">Abrir peça</a>
+            <a href="../por-momento/07-m4-prova-social-a.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">8</td>
+          <td><code>LOCCITANE_LP_M4_B</code><span class="meta">M4 — Prova Social (assunto B)<br />E4 — Prova Social &middot; D+7</span></td>
+          <td>Não abriu o M3</td>
+          <td>
+            <span class="rotulo">Assunto</span>Elas já estão vendendo L'Occitane au Brésil. E você?
+            <span class="contagem">52 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Elas já começaram. E você?
+            <span class="rotulo">Preheader</span>Cadastro gratuito, sem CNPJ e com uma líder para orientar você.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/08-m4-prova-social-b.html">Abrir peça</a>
+            <a href="../por-momento/08-m4-prova-social-b.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">9</td>
+          <td><code>LOCCITANE_LP_M5_A</code><span class="meta">M5 — Overview do Programa (assunto A)<br />E5 — Overview do Programa &middot; D+10</span></td>
+          <td>Abriu o M4</td>
+          <td>
+            <span class="rotulo">Assunto</span>Garanta seu cadastro de revendedora L'Occitane au Brésil
+            <span class="contagem">56 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Comece agora a sua revenda L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Só precisa de CPF, e-mail e um telefone com WhatsApp para se cadastrar.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/09-m5-overview-a.html">Abrir peça</a>
+            <a href="../por-momento/09-m5-overview-a.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">10</td>
+          <td><code>LOCCITANE_LP_M5_B</code><span class="meta">M5 — Overview do Programa (assunto B)<br />E5 — Overview do Programa &middot; D+10</span></td>
+          <td>Não abriu o M4: última tentativa da onda</td>
+          <td>
+            <span class="rotulo">Assunto</span>Aproveite a chance e seja uma revendedora L'Occitane au Brésil!
+            <span class="contagem">63 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Última chamada para a revenda L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Último e-mail desta sequência sobre o programa de revenda.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-momento/10-m5-overview-b.html">Abrir peça</a>
+            <a href="../por-momento/10-m5-overview-b.txt">Versão texto</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Régua anterior — 11 disparos (mantida para consulta)</h2>
+    <p class="intro">Superada pela régua de 14/08. Fica aqui porque as peças continuam válidas e
+      podem ser reaproveitadas: o E2 — Reforço, por exemplo, não tem momento na régua nova.</p>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Código do template</th><th>Gatilho</th><th>Textos do disparo</th><th>Peça</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><code>LOCCITANE_LP_M1</code><span class="meta">E-mail 1 — Apresentação<br />E1 — Apresentação &middot; D+0</span></td>
+          <td>Entrada na jornada</td>
+          <td>
+            <span class="rotulo">Assunto</span>Revenda brasilidade com nosso Programa de Revendedoras L'Occitane au Brésil!
+            <span class="contagem contagem--alerta">76 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>Bem-vinda ao universo L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Cadastro sem custo, frete grátis e desconto de 20% a 35% em cada compra.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/01-m1-apresentacao.html">Abrir peça</a>
+            <a href="../por-disparo/01-m1-apresentacao.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><code>LOCCITANE_LP_M2_ABRIU</code><span class="meta">E-mail 2 — Reforço<br />E2 — Reforço &middot; D+4</span></td>
+          <td>Abriu o E-mail 1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Revendedoras L'Occitane au Brésil vendem com a força de uma marca global
+            <span class="contagem contagem--alerta">72 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>Renda extra com produtos premiados e clientes fiéis à marca
+            <span class="rotulo">Preheader</span>Linhas que as clientes já reconhecem e um desconto que vira o seu lucro.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/02-m2-abriu-reforco.html">Abrir peça</a>
+            <a href="../por-disparo/02-m2-abriu-reforco.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><code>LOCCITANE_LP_M2_NAO_ABRIU</code><span class="meta">Reenvio do E-mail 1 (assunto novo)<br />E1 — Apresentação &middot; D+4</span></td>
+          <td>Não abriu o E-mail 1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Empreender e lucrar com produtos que encantam pode começar hoje!
+            <span class="contagem">64 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Uma oportunidade da L'Occitane au Brésil está esperando por você
+            <span class="rotulo">Preheader</span>Compre com desconto, venda pelo preço da revista e fique com a diferença.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/03-m2-nao-abriu-reenvio-e1.html">Abrir peça</a>
+            <a href="../por-disparo/03-m2-nao-abriu-reenvio-e1.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><code>LOCCITANE_LP_M3_ABRIU</code><span class="meta">E-mail 3 — Benefício, versão 1<br />E3 — Benefício &middot; D+7</span></td>
+          <td>Abriu o E-mail 2</td>
+          <td>
+            <span class="rotulo">Assunto</span>Lucre com produtos que as pessoas já amam: revenda L'Occitane au Brésil
+            <span class="contagem contagem--alerta">71 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>As vantagens de revender L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Do 20% no primeiro pedido ao 35% no nível diamante: veja a régua completa.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/04-m3-abriu-beneficio.html">Abrir peça</a>
+            <a href="../por-disparo/04-m3-abriu-beneficio.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td><code>LOCCITANE_LP_M3_NAO_ABRIU</code><span class="meta">E-mail 3 — Benefício, versão 2<br />E3 — Benefício &middot; D+7</span></td>
+          <td>Abriu o E-mail 1 e não abriu o E-mail 2</td>
+          <td>
+            <span class="rotulo">Assunto</span>Ainda dá tempo de começar a sua revenda L'Occitane au Brésil
+            <span class="contagem">60 caracteres</span>
+            <span class="rotulo">Título (H1)</span>O melhor momento para empreender com beleza é agora
+            <span class="rotulo">Preheader</span>Dá para começar com R$ 360, sem CNPJ e sem meta obrigatória todo mês.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/05-m3-nao-abriu-beneficio.html">Abrir peça</a>
+            <a href="../por-disparo/05-m3-nao-abriu-beneficio.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td><code>LOCCITANE_LP_M2_P2_ABRIU</code><span class="meta">E-mail 2 — Reforço, versão 1<br />E2 — Reforço &middot; D+7</span></td>
+          <td>Abriu o reenvio do E-mail 1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Renda extra com a força da L'Occitane au Brésil ao seu lado
+            <span class="contagem">59 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Por que revender L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Marca reconhecida, margem de 20% a 35% e apoio de uma líder pelo WhatsApp.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/06-m2-p2-abriu-reforco.html">Abrir peça</a>
+            <a href="../por-disparo/06-m2-p2-abriu-reforco.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td><code>LOCCITANE_LP_M2_P2_NAO_ABRIU</code><span class="meta">E-mail 2 — Reforço, versão 2<br />E2 — Reforço &middot; D+7</span></td>
+          <td>Não abriu o reenvio do E-mail 1</td>
+          <td>
+            <span class="rotulo">Assunto</span>O que a L'Occitane au Brésil preparou para quem quer empreender
+            <span class="contagem">63 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Empreenda com o apoio de quem é referência em cosmética no Brasil
+            <span class="rotulo">Preheader</span>Líder no WhatsApp, atendimento oficial, frete grátis e pagamento em 10x.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/07-m2-p2-nao-abriu-reforco.html">Abrir peça</a>
+            <a href="../por-disparo/07-m2-p2-nao-abriu-reforco.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">8</td>
+          <td><code>LOCCITANE_LP_M3_P2_ABRIU</code><span class="meta">E-mail 3 — Benefício, versão 1 (lead reengajado)<br />E3 — Benefício &middot; D+10</span></td>
+          <td>Reengajou pelo reenvio do E-mail 1</td>
+          <td>
+            <span class="rotulo">Assunto</span>Garanta seu cadastro de revendedora L'Occitane au Brésil
+            <span class="contagem">56 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Comece agora a sua revenda L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Só precisa de CPF, e-mail e um telefone com WhatsApp para se cadastrar.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/08-m3-p2-abriu-beneficio.html">Abrir peça</a>
+            <a href="../por-disparo/08-m3-p2-abriu-beneficio.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">9</td>
+          <td><code>LOCCITANE_LP_M4_ABRIU</code><span class="meta">E-mail 3 — Benefício, versão 2<br />E3 — Benefício &middot; D+10</span></td>
+          <td>Abriu o reenvio e não abriu o E-mail 2</td>
+          <td>
+            <span class="rotulo">Assunto</span>Garanta seu cadastro e seja revendedora L'Occitane au Brésil
+            <span class="contagem">60 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Falta um passo pro seu negócio começar
+            <span class="rotulo">Preheader</span>A marca, os produtos e o apoio já estão prontos. Falta o seu cadastro.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/09-m4-abriu-beneficio.html">Abrir peça</a>
+            <a href="../por-disparo/09-m4-abriu-beneficio.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">10</td>
+          <td><code>LOCCITANE_LP_M4_NAO_ABRIU</code><span class="meta">E-mail 3 — Benefício, versão 3 (última chamada)<br />E3 — Benefício &middot; D+10</span></td>
+          <td>Última tentativa da jornada</td>
+          <td>
+            <span class="rotulo">Assunto</span>Aproveite a chance e seja uma revendedora L'Occitane au Brésil!
+            <span class="contagem">63 caracteres</span>
+            <span class="rotulo">Título (H1)</span>Última chamada para a revenda L'Occitane au Brésil
+            <span class="rotulo">Preheader</span>Último e-mail desta sequência sobre o programa de revenda.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/10-m4-nao-abriu-ultima-chamada.html">Abrir peça</a>
+            <a href="../por-disparo/10-m4-nao-abriu-ultima-chamada.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">11</td>
+          <td><code>LOCCITANE_LP_CONFIRMACAO_EMAIL</code><span class="meta">Confirmação de cadastro<br />Confirmação de cadastro &middot; Automático</span></td>
+          <td>Lead se cadastrou na LP (sai da jornada)</td>
+          <td>
+            <span class="rotulo">Assunto</span>A L'Occitane au Brésil recebeu suas informações e seu cadastro está confirmado!
+            <span class="contagem contagem--alerta">79 caracteres — corta no celular</span>
+            <span class="rotulo">Título (H1)</span>Bem-vinda ao Programa de Revendedoras L'Occitane au Brésil!
+            <span class="rotulo">Preheader</span>Veja os próximos passos para montar o seu primeiro pedido.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="por-disparo/11-confirmacao-cadastro.html">Abrir peça</a>
+            <a href="../por-disparo/11-confirmacao-cadastro.txt">Versão texto</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="nota">Estas cópias servem só para conferência. As peças que vão para o ESP estão em
+      <code>dist/criativos</code>, <code>dist/por-momento</code> e <code>dist/por-disparo</code>,
+      com as imagens apontando para o CDN — por isso elas aparecem sem imagem se abertas direto no
+      navegador. A tabela completa de assuntos das duas réguas está em
+      <a href="../assuntos.csv">assuntos.csv</a>.</p>
+  </div>
+</body>
+</html>
