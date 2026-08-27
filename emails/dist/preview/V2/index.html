@@ -1,137 +1,182 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>V2 — E-mails do Programa de Revendedoras L'Occitane au Brésil</title>
+<title>Aprovação V2 — E-mails da jornada de revenda</title>
 <style>
-  :root {
-    --vermelho: #C02031;
-    --vermelho-escuro: #96121F;
-    --rosa: #FDECEE;
-    --rosa-medio: #F8DDE2;
-    --tinta: #2B1A13;
-    --texto: #4A3830;
-    --suave: #6E564A;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 48px 24px 72px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: #FFFFFF;
-    color: var(--texto);
-    line-height: 1.5;
-  }
-  .wrap { max-width: 960px; margin: 0 auto; }
-  header { border-bottom: 1px solid var(--rosa-medio); padding-bottom: 24px; margin-bottom: 32px; }
-  .tag {
-    display: inline-block;
-    background: var(--vermelho);
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 5px 11px;
-    border-radius: 999px;
-    margin-bottom: 14px;
-  }
-  h1 { margin: 0 0 10px; font-size: 28px; line-height: 1.25; color: var(--vermelho); }
-  .sub { margin: 0; font-size: 15px; color: var(--suave); max-width: 62ch; }
-  h2 {
-    margin: 36px 0 14px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--suave);
-  }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-  .card {
-    display: block;
-    background: var(--rosa);
-    border: 1px solid var(--rosa-medio);
-    border-radius: 14px;
-    padding: 18px 20px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(192, 32, 49, 0.12); }
-  .card .ordem { font-size: 12px; font-weight: 700; color: var(--vermelho); letter-spacing: 0.06em; }
-  .card .nome { display: block; margin: 6px 0 6px; font-size: 17px; font-weight: 700; color: var(--tinta); line-height: 1.3; }
-  .card .arq { font-size: 12px; color: var(--suave); font-family: ui-monospace, Menlo, Consolas, monospace; }
-  .nota {
-    margin-top: 40px;
-    background: var(--rosa-medio);
-    border-radius: 14px;
-    padding: 20px 22px;
-    font-size: 14px;
-  }
-  .nota p { margin: 0 0 10px; }
-  .nota p:last-child { margin-bottom: 0; }
-  .nota strong { color: var(--tinta); }
-  .amostra { display: inline-block; width: 13px; height: 13px; border-radius: 3px; vertical-align: -2px; border: 1px solid rgba(0,0,0,.08); }
+  :root { --red:#C02031; --ink:#2B1A13; --muted:#6E564A; --line:#E7D8C8; --cream:#FBF1E6; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 24px 64px; background:#F7F0E8; color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-size:1.9rem; margin:0 0 .3rem; color:var(--red); }
+  h2 { font-size:1.15rem; margin:2.5rem 0 .9rem; }
+  .intro { color:var(--muted); max-width:70ch; margin:0 0 .4rem; }
+  .cartoes { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .cartao { display:block; background:#fff; border:1px solid var(--line); border-radius:12px;
+    overflow:hidden; text-decoration:none; color:inherit; transition:transform .15s, box-shadow .15s; }
+  .cartao:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(88,40,25,.14); }
+  .cartao img { display:block; width:100%; height:110px; object-fit:cover; }
+  .cartao__corpo { padding:12px 14px; }
+  .cartao__corpo strong { display:block; color:var(--red); }
+  .cartao__corpo span { font-size:.88rem; color:var(--muted); }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);
+    vertical-align:top; font-size:.9rem; }
+  th { background:var(--cream); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); }
+  tr:last-child td { border-bottom:0; }
+  code { font-size:.78rem; background:var(--cream); padding:2px 6px; border-radius:5px; }
+  .rotulo { display:block; margin-top:9px; font-size:.7rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); }
+  .rotulo:first-child { margin-top:0; }
+  .amostra { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px;
+    border:1px solid rgba(0,0,0,.12); margin-right:2px; }
+  .nota { margin-top:2rem; padding:14px 16px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; font-size:.86rem; color:var(--muted); }
+  .nota p { margin:0 0 .7rem; }
+  .nota p:last-child { margin-bottom:0; }
+  .nota strong { color:var(--ink); }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <span class="tag">Versão 2</span>
-    <h1>E-mails do Programa de Revendedoras</h1>
-    <p class="sub">Rodada de ajustes de 26/08: textos revisados, fundo rosa no corpo da peça, botões com a marca completa e modo escuro travado.</p>
-  </header>
+  <div class="wrap">
+    <h1>E-mails da jornada de revenda — V2</h1>
+    <p class="intro">Rodada de ajustes de 26/08: textos revisados, corpo das peças em rosa,
+      botões com a marca completa e modo escuro travado.</p>
 
-  <h2>Régua de relacionamento</h2>
-  <div class="grid">
-    <a class="card" href="e1-apresentacao.html">
-      <span class="ordem">E-mail 01 · Apresentação</span>
-      <span class="nome">Bem-vinda ao universo L'Occitane au Brésil</span>
-      <span class="arq">e1-apresentacao.html</span>
-    </a>
-    <a class="card" href="e2-reforco.html">
-      <span class="ordem">E-mail 02 · Reforço</span>
-      <span class="nome">Renda extra com produtos premiados e clientes fiéis à marca</span>
-      <span class="arq">e2-reforco.html</span>
-    </a>
-    <a class="card" href="e3-beneficio.html">
-      <span class="ordem">E-mail 03 · Benefício</span>
-      <span class="nome">As vantagens de revender L'Occitane au Brésil</span>
-      <span class="arq">e3-beneficio.html</span>
-    </a>
-    <a class="card" href="e3-calculadora.html">
-      <span class="ordem">E-mail 03 · Calculadora</span>
-      <span class="nome">Faça a conta antes de começar</span>
-      <span class="arq">e3-calculadora.html</span>
-    </a>
-    <a class="card" href="e4-prova-social.html">
-      <span class="ordem">E-mail 04 · Prova social</span>
-      <span class="nome">Quem já vende conta como começou</span>
-      <span class="arq">e4-prova-social.html</span>
-    </a>
-    <a class="card" href="e5-overview-do-programa.html">
-      <span class="ordem">E-mail 05 · Overview</span>
-      <span class="nome">Comece agora a sua revenda L'Occitane au Brésil</span>
-      <span class="arq">e5-overview-do-programa.html</span>
-    </a>
-  </div>
+    <h2>Os 7 criativos</h2>
+    <div class="cartoes">
+      <a class="cartao" href="e1-apresentacao.html">
+        <img src="../../../assets/hero-apresentacao.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E1 — Apresentação</strong>
+          <span>Bem-vinda ao universo L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="e2-reforco.html">
+        <img src="../../../assets/hero-marca.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E2 — Reforço</strong>
+          <span>Renda extra com produtos premiados e clientes fiéis à marca</span>
+        </div>
+      </a>
+      <a class="cartao" href="e3-beneficio.html">
+        <img src="../../../assets/hero-beneficio.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E3 — Benefício</strong>
+          <span>As vantagens de revender L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="e3-calculadora.html">
+        <img src="../../../assets/hero-calculadora.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E3 — Calculadora</strong>
+          <span>Faça a conta antes de começar</span>
+        </div>
+      </a>
+      <a class="cartao" href="e4-prova-social.html">
+        <img src="../../../assets/hero-prova-social.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E4 — Prova Social</strong>
+          <span>Quem já vende conta como começou</span>
+        </div>
+      </a>
+      <a class="cartao" href="e5-overview-do-programa.html">
+        <img src="../../../assets/hero-overview.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>E5 — Overview do Programa</strong>
+          <span>Comece agora a sua revenda L'Occitane au Brésil</span>
+        </div>
+      </a>
+      <a class="cartao" href="confirmacao-de-cadastro.html">
+        <img src="../../../assets/hero-confirmacao.jpg" alt="" />
+        <div class="cartao__corpo">
+          <strong>Confirmação de cadastro</strong>
+          <span>Bem-vinda ao Programa de Revendedoras L'Occitane au Brésil!</span>
+        </div>
+      </a>
+    </div>
 
-  <h2>Transacional</h2>
-  <div class="grid">
-    <a class="card" href="confirmacao-de-cadastro.html">
-      <span class="ordem">Confirmação</span>
-      <span class="nome">Bem-vinda ao Programa de Revendedoras L'Occitane au Brésil!</span>
-      <span class="arq">confirmacao-de-cadastro.html</span>
-    </a>
-  </div>
+    <h2>O que mudou em cada peça</h2>
+    <table>
+      <thead>
+        <tr><th>Peça</th><th>Texto</th><th>Layout</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>e1-apresentacao</code></td>
+          <td>Novo parágrafo de abertura sobre empreender com o respaldo da marca. Os três tópicos
+            viraram "Seu lucro cresce com você", "Frete grátis para todo o Brasil" e
+            "Você não começa sozinha". A menção a CNPJ saiu do fecho.</td>
+          <td>Título em uma linha, a 24px.</td>
+        </tr>
+        <tr>
+          <td><code>e2-reforco</code></td>
+          <td>Dois parágrafos novos sobre a força da marca. Saíram "Sem burocracia" e
+            "Orientação e suporte", e entrou o box "Aqui não é consignação". Os três passos de
+            "Como funciona na prática" foram reescritos.</td>
+          <td>Título longo demais para uma linha: centralizado em duas.</td>
+        </tr>
+        <tr>
+          <td><code>e3-beneficio</code></td>
+          <td>Novo parágrafo sobre marca reconhecida. No FAQ, "Preciso comprar todo mês?" deu lugar a
+            "Os produtos são consignados?", tirando a narrativa dos seis ciclos.</td>
+          <td>Título em uma linha, a 23px. Régua de níveis mantida em branco.</td>
+        </tr>
+        <tr>
+          <td><code>e3-calculadora</code></td>
+          <td>Sem alteração, conforme o documento.</td>
+          <td>Só o layout novo. Título mantido em 27px.</td>
+        </tr>
+        <tr>
+          <td><code>e4-prova-social</code></td>
+          <td>Texto ainda não definido: o documento traz só a direção de ser mais técnico e menos
+            aspiracional. A menção a CNPJ saiu do fecho.</td>
+          <td>Só o layout novo. Título mantido em 27px.</td>
+        </tr>
+        <tr>
+          <td><code>e5-overview-do-programa</code></td>
+          <td>Novo subtexto de abertura, três tópicos reescritos e o "Sem burocracia" removido.
+            O bloco "Como começar" virou "Dá para começar mesmo sem experiência", com as quatro
+            objeções de entrada.</td>
+          <td>Título em uma linha, a 22px.</td>
+        </tr>
+        <tr>
+          <td><code>confirmacao-de-cadastro</code></td>
+          <td>Sem alteração de texto.</td>
+          <td>Só o layout novo. Título centralizado em duas linhas.</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div class="nota">
-    <p><strong>O que mudou nesta versão.</strong> O corpo da peça passou a usar o rosa <span class="amostra" style="background:#FDECEE"></span> <strong>#FDECEE</strong> sobre fundo branco, com caixas e rodapé em <span class="amostra" style="background:#F8DDE2"></span> <strong>#F8DDE2</strong>. Cabeçalho e botões seguem no vermelho <span class="amostra" style="background:#C02031"></span> <strong>#C02031</strong>.</p>
-    <p>Os botões agora trazem a marca completa, "Quero ser revendedora L'Occitane au Brésil", com espaços rígidos que impedem "L'Occitane" de se separar de "au Brésil" ao quebrar linha.</p>
-    <p>O modo escuro foi travado: o bloco <code>prefers-color-scheme</code> saiu, as metas declaram <code>light only</code> e há regras específicas para neutralizar a inversão do Outlook.com. O app do Gmail no Android ainda pode aplicar ajustes próprios, já que não oferece nenhum seletor para isso.</p>
-    <p>A calculadora não teve mudança de texto, conforme o documento. A prova social recebeu apenas o layout novo, porque o texto ainda não foi definido.</p>
+    <p class="nota">
+      <strong>Cores.</strong> O corpo da peça passou a usar o rosa
+      <span class="amostra" style="background:#FDECEE"></span> <code>#FDECEE</code> sobre fundo branco,
+      com caixas e rodapé em <span class="amostra" style="background:#F8DDE2"></span> <code>#F8DDE2</code>.
+      Cabeçalho e botões seguem no vermelho
+      <span class="amostra" style="background:#C02031"></span> <code>#C02031</code>.
+    </p>
+    <p class="nota">
+      <strong>Botões e títulos.</strong> Os botões agora trazem a marca completa,
+      "Quero ser revendedora L'Occitane au Brésil", com espaços rígidos que impedem "L'Occitane" de se
+      separar de "au Brésil" ao quebrar linha. Cada título recebeu o maior corpo em que cabe numa única
+      linha; quando isso não é possível, a composição fica centralizada.
+    </p>
+    <p class="nota">
+      <strong>Modo escuro.</strong> O bloco <code>prefers-color-scheme</code> foi removido, as metas
+      declaram <code>light only</code> e há regras específicas para neutralizar a inversão do
+      Outlook.com. O app do Gmail no Android ainda pode aplicar ajustes próprios, já que não oferece
+      nenhum seletor para isso.
+    </p>
+    <p class="nota">
+      Estas cópias servem só para conferência e apontam para as imagens locais. As peças anteriores
+      continuam em <code>preview/criativos</code>, <code>preview/por-momento</code> e
+      <code>preview/por-disparo</code>, e a tabela de assuntos das réguas está em
+      <a href="../../assuntos.csv">assuntos.csv</a>.
+    </p>
   </div>
-</div>
 </body>
 </html>
