@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>V2 — E-mails do Programa de Revendedoras L'Occitane au Brésil</title>
+<style>
+  :root {
+    --vermelho: #C02031;
+    --vermelho-escuro: #96121F;
+    --rosa: #FDECEE;
+    --rosa-medio: #F8DDE2;
+    --tinta: #2B1A13;
+    --texto: #4A3830;
+    --suave: #6E564A;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 24px 72px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: #FFFFFF;
+    color: var(--texto);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  header { border-bottom: 1px solid var(--rosa-medio); padding-bottom: 24px; margin-bottom: 32px; }
+  .tag {
+    display: inline-block;
+    background: var(--vermelho);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  h1 { margin: 0 0 10px; font-size: 28px; line-height: 1.25; color: var(--vermelho); }
+  .sub { margin: 0; font-size: 15px; color: var(--suave); max-width: 62ch; }
+  h2 {
+    margin: 36px 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--suave);
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .card {
+    display: block;
+    background: var(--rosa);
+    border: 1px solid var(--rosa-medio);
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(192, 32, 49, 0.12); }
+  .card .ordem { font-size: 12px; font-weight: 700; color: var(--vermelho); letter-spacing: 0.06em; }
+  .card .nome { display: block; margin: 6px 0 6px; font-size: 17px; font-weight: 700; color: var(--tinta); line-height: 1.3; }
+  .card .arq { font-size: 12px; color: var(--suave); font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .nota {
+    margin-top: 40px;
+    background: var(--rosa-medio);
+    border-radius: 14px;
+    padding: 20px 22px;
+    font-size: 14px;
+  }
+  .nota p { margin: 0 0 10px; }
+  .nota p:last-child { margin-bottom: 0; }
+  .nota strong { color: var(--tinta); }
+  .amostra { display: inline-block; width: 13px; height: 13px; border-radius: 3px; vertical-align: -2px; border: 1px solid rgba(0,0,0,.08); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">Versão 2</span>
+    <h1>E-mails do Programa de Revendedoras</h1>
+    <p class="sub">Rodada de ajustes de 26/08: textos revisados, fundo rosa no corpo da peça, botões com a marca completa e modo escuro travado.</p>
+  </header>
+
+  <h2>Régua de relacionamento</h2>
+  <div class="grid">
+    <a class="card" href="e1-apresentacao.html">
+      <span class="ordem">E-mail 01 · Apresentação</span>
+      <span class="nome">Bem-vinda ao universo L'Occitane au Brésil</span>
+      <span class="arq">e1-apresentacao.html</span>
+    </a>
+    <a class="card" href="e2-reforco.html">
+      <span class="ordem">E-mail 02 · Reforço</span>
+      <span class="nome">Renda extra com produtos premiados e clientes fiéis à marca</span>
+      <span class="arq">e2-reforco.html</span>
+    </a>
+    <a class="card" href="e3-beneficio.html">
+      <span class="ordem">E-mail 03 · Benefício</span>
+      <span class="nome">As vantagens de revender L'Occitane au Brésil</span>
+      <span class="arq">e3-beneficio.html</span>
+    </a>
+    <a class="card" href="e3-calculadora.html">
+      <span class="ordem">E-mail 03 · Calculadora</span>
+      <span class="nome">Faça a conta antes de começar</span>
+      <span class="arq">e3-calculadora.html</span>
+    </a>
+    <a class="card" href="e4-prova-social.html">
+      <span class="ordem">E-mail 04 · Prova social</span>
+      <span class="nome">Quem já vende conta como começou</span>
+      <span class="arq">e4-prova-social.html</span>
+    </a>
+    <a class="card" href="e5-overview-do-programa.html">
+      <span class="ordem">E-mail 05 · Overview</span>
+      <span class="nome">Comece agora a sua revenda L'Occitane au Brésil</span>
+      <span class="arq">e5-overview-do-programa.html</span>
+    </a>
+  </div>
+
+  <h2>Transacional</h2>
+  <div class="grid">
+    <a class="card" href="confirmacao-de-cadastro.html">
+      <span class="ordem">Confirmação</span>
+      <span class="nome">Bem-vinda ao Programa de Revendedoras L'Occitane au Brésil!</span>
+      <span class="arq">confirmacao-de-cadastro.html</span>
+    </a>
+  </div>
+
+  <div class="nota">
+    <p><strong>O que mudou nesta versão.</strong> O corpo da peça passou a usar o rosa <span class="amostra" style="background:#FDECEE"></span> <strong>#FDECEE</strong> sobre fundo branco, com caixas e rodapé em <span class="amostra" style="background:#F8DDE2"></span> <strong>#F8DDE2</strong>. Cabeçalho e botões seguem no vermelho <span class="amostra" style="background:#C02031"></span> <strong>#C02031</strong>.</p>
+    <p>Os botões agora trazem a marca completa, "Quero ser revendedora L'Occitane au Brésil", com espaços rígidos que impedem "L'Occitane" de se separar de "au Brésil" ao quebrar linha.</p>
+    <p>O modo escuro foi travado: o bloco <code>prefers-color-scheme</code> saiu, as metas declaram <code>light only</code> e há regras específicas para neutralizar a inversão do Outlook.com. O app do Gmail no Android ainda pode aplicar ajustes próprios, já que não oferece nenhum seletor para isso.</p>
+    <p>A calculadora não teve mudança de texto, conforme o documento. A prova social recebeu apenas o layout novo, porque o texto ainda não foi definido.</p>
+  </div>
+</div>
+</body>
+</html>
