@@ -1,0 +1,36 @@
+Um clube de benefícios que cresce com você
+==========================================
+
+Descontos em marcas parceiras que aumentam a cada nível da sua revenda.
+
+Olá, {{NOME}},
+
+Além do lucro em cada venda, a sua revenda L'Occitane au Brésil dá acesso a um clube de benefícios com descontos em marcas parceiras para o seu dia a dia. E, assim como o seu lucro, as vantagens aumentam a cada nível do Plano de Crescimento.
+
+Bronze
+
+Desde o início, você aproveita descontos em parceiros como Domino's (30% off), Sem Parar (98% off por 3 meses), Buser e Flixbus (15% off), além de cursos de idiomas no CNA e no Mondly.
+
+Prata
+
+Chegam as marcas de moda e esporte: até 80% off na Dafiti, até 25% off em todo o site do Extra.com, 28% off na Conquer e descontos na Netshoes, na Mizuno e na Fila.
+
+Ouro
+
+O clube ganha viagens, lazer e educação: até R$ 200 de desconto na Decolar, até 40% off em cinemas, 70% off na Open English, até 67% off na Wizard e planos da Alia Seguros a partir de R$ 39,90 por mês.
+
+Diamante
+
+O nível mais alto reúne parceiros premium: até 30% off em Canon e Panasonic, 22% off no Thermas da Mata, 15% off na Meliá Hotéis e condições exclusivas na Vivara e na Chandon.
+
+E os benefícios se acumulam: a cada nível conquistado, você mantém as vantagens anteriores e desbloqueia novas.
+
+Fazer meu primeiro pedido (https://revendedor.loccitaneaubresil.com/?utm_source=email&utm_medium=crm&utm_campaign=revenda_primeiro_pedido&utm_content=loccitane_pp_d16_clube)
+
+Ver todos os benefícios do clube ({{URL_CLUBE_BENEFICIOS}})
+
+Comece pelo primeiro pedido e aproveite um clube completo com benefícios exclusivos pensados para você!
+
+Com carinho,
+
+Equipe L'Occitane au Brésil

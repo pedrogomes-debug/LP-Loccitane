@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aprovação — Régua de Primeiro Pedido</title>
+<style>
+  :root { --red:#C02031; --ink:#2B1A13; --muted:#6E564A; --line:#E7D8C8; --cream:#FBF1E6; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 24px 64px; background:#F7F0E8; color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-size:1.9rem; margin:0 0 .3rem; color:var(--red); }
+  h2 { font-size:1.15rem; margin:2.5rem 0 .9rem; }
+  .intro { color:var(--muted); max-width:75ch; margin:0 0 .4rem; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);
+    vertical-align:top; font-size:.9rem; }
+  th { background:var(--cream); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); }
+  tr:last-child td { border-bottom:0; }
+  code { font-size:.78rem; background:var(--cream); padding:2px 6px; border-radius:5px; }
+  .num { color:var(--muted); font-variant-numeric:tabular-nums; }
+  .meta { display:block; margin-top:5px; font-size:.78rem; color:var(--muted); }
+  .rotulo { display:block; margin-top:9px; font-size:.7rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); }
+  .rotulo:first-child { margin-top:0; }
+  .sugerido { text-transform:none; letter-spacing:0; color:#B4551A; font-weight:600; }
+  .contagem { display:block; font-size:.76rem; color:var(--muted); }
+  .contagem--alerta { color:#B4551A; font-weight:600; }
+  .acoes { white-space:nowrap; }
+  .acoes a { display:block; font-size:.85rem; color:var(--red); }
+  .botao { display:inline-block !important; margin-bottom:8px; padding:8px 14px; border-radius:999px;
+    background:var(--red); color:#fff !important; text-decoration:none; font-weight:600; }
+  .nota { margin-top:1.2rem; padding:14px 16px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; font-size:.86rem; color:var(--muted); }
+  .nota strong { color:var(--ink); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Régua de Primeiro Pedido — V2</h1>
+    <p class="intro">Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido.
+      A revendedora sai da régua assim que o pedido é feito. Layout V2 (corpo rosa), com cabeçalho
+      e rodapé da confirmação de cadastro.</p>
+
+    <h2>7 disparos</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Código do template</th><th>Gatilho</th><th>Textos do disparo</th><th>Peça</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><code>LOCCITANE_PP_D0_BOAS_VINDAS</code><span class="meta">D+0 &middot; Boas-vindas + login</span></td>
+          <td>Cadastro concluído na LP</td>
+          <td>
+            <span class="rotulo">Assunto</span>Seu cadastro de revendedora tem um presente esperando!
+            <span class="contagem">54 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Seu primeiro pedido tem um presente esperando por você
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Kit inicial e brinde exclusivo acompanham o seu primeiro pedido.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="01-d0-boas-vindas.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/01-d0-boas-vindas.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><code>LOCCITANE_PP_D4_BRINDE</code><span class="meta">D+4 &middot; Brinde</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Seu primeiro pedido tem um brinde especial para você!
+            <span class="contagem">53 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Um brinde exclusivo no seu primeiro pedido
+            <span class="contagem">25px</span>
+            <span class="rotulo">Preheader</span>Escolha seus produtos, finalize a compra e receba um presente exclusivo.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="02-d4-brinde.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/02-d4-brinde.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><code>LOCCITANE_PP_D8_KIT</code><span class="meta">D+8 &middot; Kit inicial</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Os favoritos dos nossos consumidores, direto para suas mãos
+            <span class="contagem">59 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Conheça o kit inicial da sua revenda
+            <span class="contagem">27px</span>
+            <span class="rotulo">Preheader</span>Produtos escolhidos para você apresentar a marca e vender desde o início.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="03-d8-kit-inicial.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/03-d8-kit-inicial.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><code>LOCCITANE_PP_D12_NIVEIS</code><span class="meta">D+12 &middot; Mecânicas e vantagens de cada nível</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Quanto mais você vende, maior seu lucro!
+            <span class="contagem">40 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Quanto mais você vende, maior o seu lucro
+            <span class="contagem">25px</span>
+            <span class="rotulo">Preheader</span>Do bronze ao diamante, veja como evoluir na sua revenda.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="04-d12-plano-de-crescimento.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/04-d12-plano-de-crescimento.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td><code>LOCCITANE_PP_D16_CLUBE</code><span class="meta">D+16 &middot; Benefícios por nível</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Um clube de benefícios exclusivo para você!
+            <span class="contagem">43 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Um clube de benefícios que cresce com você
+            <span class="contagem">24px</span>
+            <span class="rotulo">Preheader <span class="sugerido">sugestão — aprovar</span></span>Descontos em marcas parceiras que aumentam a cada nível da sua revenda.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="05-d16-clube-de-beneficios.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/05-d16-clube-de-beneficios.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td><code>LOCCITANE_PP_D20_LEMBRETE</code><span class="meta">D+20 &middot; Ainda não fez o primeiro pedido?</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>{{NOME}}, ainda não fez seu primeiro pedido?
+            <span class="contagem">44 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Seu kit e seu brinde continuam esperando por você
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Nosso kit inicial e brinde exclusivo te esperam!
+          </td>
+          <td class="acoes">
+            <a class="botao" href="06-d20-lembrete.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/06-d20-lembrete.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td><code>LOCCITANE_PP_D24_DEPOIMENTOS</code><span class="meta">D+24 &middot; Depoimentos</span></td>
+          <td>Ainda não fez o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Elas já deram o primeiro passo, agora é sua vez!
+            <span class="contagem">48 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Elas já deram o primeiro passo. Agora é a sua vez
+            <span class="contagem">22px</span>
+            <span class="rotulo">Preheader</span>Inspire-se com histórias reais de quem já vende nossa Brasilidade.
+          </td>
+          <td class="acoes">
+            <a class="botao" href="07-d24-depoimentos.html">Abrir peça</a>
+            <a href="../../primeiro-pedido/07-d24-depoimentos.txt">Versão texto</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="nota"><strong>Brinde.</strong> Ainda não há foto do brinde: as peças usam uma imagem
+      provisória (<code>assets-primeiro-pedido/brinde.jpg</code>, 1072x560). Substitua o arquivo
+      mantendo o nome e a proporção.</p>
+    <p class="nota"><strong>Kit inicial.</strong> Os quatro produtos são a sugestão de primeiro
+      pedido que estava na landing (Geleia Romã, Deo Colônia Capim-Limão, Kit Caju Viagem e
+      sacolas). Confirme se é esta a cesta de best-sellers do kit.</p>
+    <p class="nota"><strong>Merge tags.</strong> <code>{{NOME}}</code> no assunto do
+      D20 e na saudação de todas as peças, e <code>{{URL_CLUBE_BENEFICIOS}}</code> no link
+      secundário do D16. Ajuste a sintaxe para a do ESP e defina um valor padrão para o nome.</p>
+    <p class="nota">Estas cópias usam as imagens locais. As peças para o ESP estão em
+      <code>dist/primeiro-pedido</code>, com as imagens em <code>https://SEU-DOMINIO.com.br/email/revenda</code>.
+      A tabela de assuntos está em <a href="../../primeiro-pedido/assuntos.csv">assuntos.csv</a>.</p>
+  </div>
+</body>
+</html>

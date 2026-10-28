@@ -17,7 +17,9 @@ const PREVIEW = path.resolve("emails/dist/preview");
 /** Os criativos ganham desktop e celular; os disparos, só desktop (mudam apenas nos textos). */
 const PASTAS = [
   { pasta: "criativos", tamanhos: [["desktop", 700], ["mobile", 390]] },
-  { pasta: "por-disparo", tamanhos: [["desktop", 700]] }
+  { pasta: "por-disparo", tamanhos: [["desktop", 700]] },
+  { pasta: "V2/por-momento", tamanhos: [["desktop", 700], ["mobile", 390]] },
+  { pasta: "primeiro-pedido", tamanhos: [["desktop", 700], ["mobile", 390]] }
 ];
 
 const navegador = await puppeteer.launch({

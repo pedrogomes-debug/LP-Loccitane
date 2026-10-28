@@ -21,6 +21,42 @@ de cada momento é o assunto e o título.
 O **E2 — Reforço** foi feito para a régua anterior e não tem momento na régua de 14/08. A peça
 segue pronta e válida, disponível para um teste A/B de conteúdo ou para as próximas ondas.
 
+## Régua de Primeiro Pedido (V2)
+
+Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido (D0, D4, D8, D12,
+D16, D20 e D24). A revendedora sai da régua quando faz o pedido. Fonte: PDF "Régua - L'Occitane -
+Primeiro Pedido".
+
+- `conteudo-primeiro-pedido.mjs` — textos, assuntos, preheaders e códigos de cada peça
+- `build-primeiro-pedido.mjs` — monta as peças com cabeçalho e rodapé do modelo V2 da confirmação
+- `preparar-imagens-primeiro-pedido.mjs` — fotos do kit e imagem provisória do brinde, em
+  `assets-primeiro-pedido/` (no CDN, sobem para a mesma pasta de `assets/`)
+- Saídas: `dist/primeiro-pedido/` (ESP, `.html` + `.txt` + `assuntos.csv`) e
+  `dist/preview/primeiro-pedido/index.html` (aprovação)
+
+As peças saem sem rodapé (sem descadastro, dados da empresa e "Abra no navegador"): o link de
+descadastro e o endereço do remetente precisam ser incluídos pelo ESP no envio.
+
+Para regerar: `npm run emails:primeiro-pedido`. Pendências: foto real do brinde (substituir
+`assets-primeiro-pedido/brinde.jpg`, 1072x560), confirmação dos SKUs do kit, merge tags
+`{{NOME}}` e `{{URL_CLUBE_BENEFICIOS}}`, e aprovação dos H1 e do preheader do D16, que o documento
+não traz.
+
+## V2 — layout rosa (vigente)
+
+Os criativos V2 foram ajustados à mão e ficam em `modelos-v2/`. O `build-v2.mjs` (`npm run emails:v2`)
+gera, a partir deles, os 10 disparos da régua de 14/08 e a confirmação: cada disparo recebe o seu
+`<title>`, preheader, H1 e `utm_content`, e as imagens passam a apontar para `config.baseImagens`.
+O H1 ganha o maior corpo entre 27px e 22px em que cabe numa linha; quando não cabe, fica em 24px
+centralizado em duas linhas.
+
+- `dist/V2/por-momento/` — as 11 peças para o ESP (`.html` + `.txt`)
+- `dist/V2/assuntos.csv` — códigos, assuntos, títulos e preheaders
+- `dist/preview/V2/index.html` — página de aprovação, com as peças usando as imagens locais
+
+Para alterar o corpo de uma peça, edite o modelo em `modelos-v2/` e rode `npm run emails:v2` de novo.
+O `build.mjs` apaga a pasta `dist` inteira, por isso o `npm run emails` roda o `build-v2.mjs` depois dele.
+
 ## Aprovação (local, sem depender de CDN)
 
 Abra **`dist/preview/index.html`** no navegador (`npm run emails:aprovar`). A página lista os
