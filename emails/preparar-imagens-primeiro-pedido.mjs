@@ -1,22 +1,28 @@
 /**
- * Imagens da régua de Primeiro Pedido.
+ * Imagens da régua de Primeiro Pedido (V2).
  *
  * Ficam em emails/assets-primeiro-pedido porque o preparar-imagens.mjs apaga de
  * emails/assets tudo o que não reconhece. No CDN, os dois conjuntos sobem para a
  * mesma pasta (config.baseImagens).
  *
+ * - Capas: fotos das linhas (pasta do WeTransfer "outras-linhas"), 1200x600 para
+ *   exibir a 600x300.
+ * - Brinde: a arte "Iniciou, ganhou!" (Nosso Abraço) inteira, a 640px de largura
+ *   para exibir a 320px.
  * - Kit inicial: os quatro produtos sugeridos na landing, exibidos a 128px no desktop
  *   e até ~175px no celular; arquivo a 300px.
- * - Brinde: ainda não há foto. Sai uma imagem provisória, bem sinalizada, no tamanho
- *   final (536x280 de exibição, arquivo a 1072x560). Basta substituir o arquivo.
+ *
+ * As fontes ficam fora do repositório; se a pasta mudar, ajuste FOTOS e ARTE_BRINDE.
  *
  * Uso: node emails/preparar-imagens-primeiro-pedido.mjs
  */
 import sharp from "sharp";
-import { mkdir, readdir, stat } from "node:fs/promises";
+import { mkdir, readdir, rm, stat } from "node:fs/promises";
 import path from "node:path";
 
 const ORIGEM = "assets/web";
+const FOTOS = "E:/wetransfer_outras-linhas_2026-10-30_1852 (1)";
+const ARTE_BRINDE = "E:/WhatsApp Image 2026-10-29 at 17.59.19.jpeg";
 const DESTINO = "emails/assets-primeiro-pedido";
 
 /** Rosa do corpo da peça V2: as quinas transparentes dos packs somem no fundo. */
@@ -27,6 +33,16 @@ const PRODUTOS = [
   { saida: "kit-deo-capim.jpg", origem: "pack-deo.png" },
   { saida: "kit-caju-viagem.jpg", origem: "pack-caju.png" },
   { saida: "kit-sacolas.jpg", origem: "pack-sacola.png" }
+];
+
+const CAPAS = [
+  { saida: "capa-d0.jpg", origem: "CAJU/acfad69a-foto_14-hd.jpg", posicao: "attention" },
+  { saida: "capa-d4.jpg", origem: "CHAMEGO & BAFAFA/739528d8-foto_4-md.jpg", posicao: "centre" },
+  { saida: "capa-d8.jpg", origem: "CAJU/7acc06e3-foto_3-hd.jpg", posicao: "centre" },
+  { saida: "capa-d12.jpg", origem: "PUDIM/78090cdd-foto_1-hd.jpg", posicao: "centre" },
+  { saida: "capa-d16.jpg", origem: "ROMÃ/42193224-foto_23-hd.jpg", posicao: "centre" },
+  { saida: "capa-d20.jpg", origem: "CHAMEGO & BAFAFA/99904acd-foto_20-hd.jpg", posicao: "centre" },
+  { saida: "capa-d24.jpg", origem: "OUTRAS LINHAS/ec437c42-foto_18-hd.jpg", posicao: "attention" }
 ];
 
 const jpeg = (pipeline, qualidade = 80) =>
@@ -42,19 +58,24 @@ async function gerarProdutos() {
   }
 }
 
-async function gerarBrindeProvisorio() {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1072" height="560">
-  <rect width="1072" height="560" fill="#F8DDE2"/>
-  <rect x="24" y="24" width="1024" height="512" rx="24" fill="none" stroke="#C02031" stroke-width="4" stroke-dasharray="18 14"/>
-  <text x="536" y="260" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="bold" fill="#C02031">FOTO DO BRINDE</text>
-  <text x="536" y="330" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#6E564A">Imagem provisória: substituir antes do envio</text>
-</svg>`;
-  await jpeg(sharp(Buffer.from(svg)), 82).toFile(path.join(DESTINO, "brinde.jpg"));
+async function gerarCapas() {
+  for (const { saida, origem, posicao } of CAPAS) {
+    await jpeg(
+      sharp(path.join(FOTOS, origem)).rotate().resize(1200, 600, { fit: "cover", position: posicao }),
+      72
+    ).toFile(path.join(DESTINO, saida));
+  }
 }
 
+async function gerarBrinde() {
+  await jpeg(sharp(ARTE_BRINDE).resize(640), 82).toFile(path.join(DESTINO, "brinde.jpg"));
+}
+
+await rm(DESTINO, { recursive: true, force: true });
 await mkdir(DESTINO, { recursive: true });
 await gerarProdutos();
-await gerarBrindeProvisorio();
+await gerarCapas();
+await gerarBrinde();
 
 for (const arquivo of (await readdir(DESTINO)).sort()) {
   const { size } = await stat(path.join(DESTINO, arquivo));

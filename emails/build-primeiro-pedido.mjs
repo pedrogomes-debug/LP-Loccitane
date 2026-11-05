@@ -1,24 +1,24 @@
 /**
- * Gera as 7 peças da régua de Primeiro Pedido no layout V2 (corpo rosa).
+ * Gera as 7 peças da régua de Primeiro Pedido (V2 da régua) no layout V2 (corpo rosa).
  *
- * Cabeçalho, estilos e rodapé vêm do modelo V2 da confirmação de cadastro, que já é
- * o rodapé de quem concluiu o cadastro; o corpo é montado a partir de
- * conteudo-primeiro-pedido.mjs com os mesmos componentes visuais da V2.
+ * Cabeçalho e estilos vêm do modelo V2 da confirmação de cadastro; o corpo é montado a
+ * partir de conteudo-primeiro-pedido.mjs com os mesmos componentes visuais da V2.
  *
  * Saídas:
- *   dist/primeiro-pedido/           → as 7 peças para o ESP (.html + .txt) e assuntos.csv
- *   dist/preview/primeiro-pedido/   → as mesmas peças com imagens locais + página de aprovação
+ *   dist/primeiro-pedido-v2/           → as 7 peças para o ESP (.html + .txt) e assuntos.csv
+ *   dist/preview/primeiro-pedido-v2/   → as mesmas peças com imagens locais + página de aprovação
  *
  * Uso: node emails/build-primeiro-pedido.mjs (rodar depois do build.mjs, que apaga a pasta dist).
  */
 import { mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
-import { config, pecas } from "./conteudo-primeiro-pedido.mjs";
+import { URL_CTA, config, pecas } from "./conteudo-primeiro-pedido.mjs";
 import { H1_DUAS_LINHAS, criarMedidor, esc, marcaInteira, paraTexto } from "./v2-comum.mjs";
 
 const SHELL = "emails/modelos-v2/confirmacao-de-cadastro.html";
-const DIST = "emails/dist/primeiro-pedido";
-const PREVIEW = "emails/dist/preview/primeiro-pedido";
+const PASTA = "primeiro-pedido-v2";
+const DIST = `emails/dist/${PASTA}`;
+const PREVIEW = `emails/dist/preview/${PASTA}`;
 
 /** Marcadores de caminho: as imagens da V2 e as desta régua ficam em pastas diferentes no repositório. */
 const IMG = "__IMG__/";
@@ -57,7 +57,7 @@ const comUtm = (url, codigo) => {
 
 const C = {
   capa: ({ arquivo, alt, altura = 300 }) =>
-    `<tr><td style="padding:0;font-size:0;line-height:0;"><img src="${IMG}${arquivo}" width="600" height="${altura}" alt="${esc(alt)}" style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;" /></td></tr>`,
+    `<tr><td style="padding:0;font-size:0;line-height:0;"><img src="${IMG_PP}${arquivo}" width="600" height="${altura}" alt="${esc(alt)}" style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;" /></td></tr>`,
 
   titulo: (html, { tamanho, entrelinha }) =>
     `<tr><td class="px" align="center" style="padding:0 32px;"><h1 class="t-red h1" style="${RESET}font-family:${FONTE};font-size:${tamanho}px;line-height:${entrelinha}px;font-weight:bold;color:${COR.vermelho};text-align:center;">${html}</h1></td></tr>`,
@@ -108,9 +108,9 @@ const C = {
       `<p style="${RESET}font-family:${FONTE};font-size:15px;line-height:22px;text-align:center;"><a href="${url}" class="t-red" style="color:${COR.vermelho};font-weight:bold;text-decoration:underline;">${esc(rotulo)}</a></p>`
     ),
 
-  imagem: ({ arquivo, alt, altura }) =>
+  imagem: ({ arquivo, alt, largura, altura, exibir = 536 }) =>
     linha(
-      `<img src="${IMG_PP}${arquivo}" width="536" height="${altura}" alt="${esc(alt)}" style="display:block;width:100%;max-width:536px;height:auto;border:0;outline:none;text-decoration:none;border-radius:12px;" />`
+      `<img src="${IMG_PP}${arquivo}" width="${exibir}" height="${Math.round((exibir * altura) / largura)}" alt="${esc(alt)}" style="display:block;margin:0 auto;width:100%;max-width:${exibir}px;height:auto;border:0;outline:none;text-decoration:none;border-radius:12px;" />`
     ),
 
   /** Quatro produtos: 4 colunas no desktop, 2x2 no celular (cada par é uma célula .stack). */
@@ -153,54 +153,55 @@ const C = {
           ).join("")}
         </table>`),
 
-  beneficios: (itens) =>
+  /** Parceiros de um nível do clube: faixa na cor do nível e uma linha por parceiro. */
+  beneficios: ({ nivel, itens }) =>
     linha(`
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;border:1px solid ${COR.bordaTabela};border-radius:12px;background-color:#FFFFFF;" class="tabela">
+          <tr>
+            <td width="6" rowspan="${itens.length + 1}" style="width:6px;background-color:${COR_NIVEL[nivel]};font-size:0;line-height:0;">&nbsp;</td>
+            <td colspan="2" style="padding:14px 16px 6px;font-family:${FONTE};">
+              <p class="t-ink" style="${RESET}font-size:16px;line-height:22px;font-weight:bold;color:${COR.tinta};">Nível ${esc(nivel)}</p>
+            </td>
+          </tr>
           ${itens
             .map(
-              (b, i) => `
+              (b) => `
           <tr>
-            <td width="6" style="width:6px;background-color:${COR_NIVEL[b.nivel]};font-size:0;line-height:0;">&nbsp;</td>
-            <td valign="top" style="padding:14px 16px;border-top:${i ? `1px solid ${COR.linhaTabela}` : "0"};font-family:${FONTE};">
-              <p class="t-ink" style="${RESET}font-size:16px;line-height:22px;font-weight:bold;color:${COR.tinta};">${esc(b.nivel)}</p>
-              <p class="t-body" style="${RESET}padding-top:4px;font-size:15px;line-height:22px;color:${COR.texto};text-align:justify;">${esc(b.texto)}</p>
+            <td valign="top" style="padding:10px 8px 10px 16px;border-top:1px solid ${COR.linhaTabela};font-family:${FONTE};">
+              <p class="t-ink" style="${RESET}font-size:15px;line-height:21px;font-weight:bold;color:${COR.tinta};">${esc(b.parceiro)}</p>
+            </td>
+            <td valign="top" align="right" style="padding:10px 16px 10px 0;border-top:1px solid ${COR.linhaTabela};font-family:${FONTE};">
+              <p class="t-red" style="${RESET}font-size:15px;line-height:21px;font-weight:bold;color:${COR.vermelho};text-align:right;">${esc(b.oferta)}</p>
             </td>
           </tr>`
             )
             .join("")}
         </table>`),
 
-  pilares: (itens) =>
+  lista: (itens) =>
     linha(`
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;">
           ${itens
             .map(
-              (p, i) => `
+              (texto, i) => `
           <tr>
-            <td width="12" valign="top" style="width:12px;padding:${i ? "14px" : "0"} 0 0 0;">
+            <td width="12" valign="top" style="width:12px;padding:${i ? "18px" : "8px"} 0 0 0;">
               <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
                 <td width="8" height="8" class="dot" style="width:8px;height:8px;background-color:${COR.vermelho};border-radius:4px;font-size:0;line-height:0;">&nbsp;</td>
               </tr></table>
             </td>
             <td valign="top" style="padding:${i ? "10px" : "0"} 0 0 12px;font-family:${FONTE};">
-              <p class="t-ink" style="${RESET}font-size:16px;line-height:23px;font-weight:bold;color:${COR.tinta};">${esc(p.titulo)}</p>
-              <p class="t-body" style="${RESET}padding-top:3px;font-size:15px;line-height:22px;color:${COR.texto};text-align:justify;">${p.texto}</p>
+              <p class="t-body" style="${RESET}font-size:16px;line-height:25px;color:${COR.texto};">${texto}</p>
             </td>
           </tr>`
             )
             .join("")}
         </table>`),
 
-  destaque: ({ titulo, texto }) =>
-    linha(`
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;background-color:${COR.caixa};border-radius:12px;" class="box">
-          <tr>
-            <td style="padding:18px 20px;font-family:${FONTE};">
-              <p class="t-red" style="${RESET}font-size:13px;line-height:18px;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:${COR.vermelho};padding-bottom:6px;">${esc(titulo)}</p>
-              <p class="t-body" style="${RESET}font-size:16px;line-height:24px;color:${COR.texto};text-align:justify;">${texto}</p>
-            </td>
-          </tr>
-        </table>`),
+  nota: (texto) =>
+    linha(
+      `<p class="t-muted" style="${RESET}font-family:${FONTE};font-size:12px;line-height:17px;color:${COR.suave};">${esc(texto)}</p>`
+    ),
 
   depoimento: ({ texto, autor, detalhe }) =>
     linha(`
@@ -224,7 +225,7 @@ const C = {
 const ESPACO_ENTRE = (anterior, atual) =>
   anterior?.tipo === "depoimento" && atual.tipo === "depoimento" ? 12 : 22;
 
-function renderizarBloco(bloco, urlCta) {
+function renderizarBloco(bloco, urlCta, codigo) {
   switch (bloco.tipo) {
     case "saudacao":
       return C.saudacao(bloco.texto);
@@ -235,7 +236,7 @@ function renderizarBloco(bloco, urlCta) {
     case "cta":
       return C.botao(bloco.rotulo, urlCta);
     case "link":
-      return C.link(bloco.rotulo, bloco.url);
+      return C.link(bloco.rotulo, atributo(comUtm(bloco.url, codigo)));
     case "imagem":
       return C.imagem(bloco);
     case "produtos":
@@ -243,11 +244,11 @@ function renderizarBloco(bloco, urlCta) {
     case "niveis":
       return C.niveis();
     case "beneficios":
-      return C.beneficios(bloco.itens);
-    case "pilares":
-      return C.pilares(bloco.itens);
-    case "destaque":
-      return C.destaque(bloco);
+      return C.beneficios(bloco);
+    case "lista":
+      return C.lista(bloco.itens);
+    case "nota":
+      return C.nota(bloco.texto);
     case "depoimento":
       return C.depoimento(bloco);
     case "assinatura":
@@ -288,8 +289,12 @@ async function montarPeca(peca, shell, medidor) {
   const corpoH1 = medidor ? await medidor.corpo(tituloHtml) : H1_DUAS_LINHAS;
 
   const blocos = peca.blocos
-    .map((bloco, i) => (i ? espaco(ESPACO_ENTRE(peca.blocos[i - 1], bloco)) : "") + renderizarBloco(bloco, urlCta))
-    .join("");
+    .map(
+      (bloco, i) =>
+        (i ? espaco(ESPACO_ENTRE(peca.blocos[i - 1], bloco)) : "") + renderizarBloco(bloco, urlCta, peca.codigo)
+    )
+    .join("")
+    .replaceAll(URL_CTA, urlCta);
 
   const antes = shell.antes
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(peca.titulo)} — ${esc(config.remetente.nome)}</title>`)
@@ -325,7 +330,9 @@ function validar(peca, html) {
     alertas.push(`utm_content incorreto: ${[...utms].join(", ")}`);
   }
   if (/SEU-DOMINIO/.test(html)) alertas.push("baseImagens ainda é placeholder");
-  if (html.includes(config.tags.clube)) alertas.push(`link do clube é a merge tag ${config.tags.clube}`);
+  const corpo = html.slice(html.indexOf("<body"));
+  const sobras = corpo.match(/\[(?:nome|foto|imagem|placeholder|bloco|cta|link)[^\]]*\]|__URL_CTA__|\{\{URL_[A-Z_]+\}\}/gi);
+  if (sobras) alertas.push(`marcação do roteiro sem substituir: ${[...new Set(sobras)].join(", ")}`);
   if (peca.assunto.length > 70) alertas.push(`assunto com ${peca.assunto.length} caracteres`);
   return { nome: peca.arquivo, bytes, imagens: imagens.length, alertas };
 }
@@ -353,7 +360,7 @@ function paginaAprovacao(itens) {
           </td>
           <td class="acoes">
             <a class="botao" href="${peca.arquivo}.html">Abrir peça</a>
-            <a href="../../primeiro-pedido/${peca.arquivo}.txt">Versão texto</a>
+            <a href="../../${PASTA}/${peca.arquivo}.txt">Versão texto</a>
           </td>
         </tr>`;
     })
@@ -403,8 +410,8 @@ function paginaAprovacao(itens) {
   <div class="wrap">
     <h1>Régua de Primeiro Pedido — V2</h1>
     <p class="intro">Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido.
-      A revendedora sai da régua assim que o pedido é feito. Layout V2 (corpo rosa), com cabeçalho
-      e rodapé da confirmação de cadastro.</p>
+      A revendedora sai da régua assim que o pedido é feito. Textos conforme o PDF de correções,
+      no layout V2 (corpo rosa) com o cabeçalho da confirmação de cadastro.</p>
 
     <h2>${itens.length} disparos</h2>
     <table>
@@ -416,18 +423,25 @@ ${linhas}
       </tbody>
     </table>
 
-    <p class="nota"><strong>Brinde.</strong> Ainda não há foto do brinde: as peças usam uma imagem
-      provisória (<code>assets-primeiro-pedido/brinde.jpg</code>, 1072x560). Substitua o arquivo
-      mantendo o nome e a proporção.</p>
-    <p class="nota"><strong>Kit inicial.</strong> Os quatro produtos são a sugestão de primeiro
-      pedido que estava na landing (Geleia Romã, Deo Colônia Capim-Limão, Kit Caju Viagem e
-      sacolas). Confirme se é esta a cesta de best-sellers do kit.</p>
-    <p class="nota"><strong>Merge tags.</strong> <code>${escPagina(config.tags.nome)}</code> no assunto do
-      D20 e na saudação de todas as peças, e <code>${escPagina(config.tags.clube)}</code> no link
-      secundário do D16. Ajuste a sintaxe para a do ESP e defina um valor padrão para o nome.</p>
+    <p class="nota"><strong>Brinde (aprovar).</strong> O PDF lista cremes de mãos Brésil e "mais de
+      R$ 140", mas as peças usam o brinde vigente da arte "Iniciou, ganhou!": Sabonete Líquido
+      Corporal Nosso Abraço 200 ml e Deo Colônia Nosso Abraço 75 ml, R$ 264,98. A foto é o recorte
+      dos produtos da arte, e o texto legal dela (validade de 29/10/2026 a 18/11/2026, 1 uso por CPF)
+      entra em letra miúda no fim das peças que mostram o brinde (D0, D4 e D20). Quando a promoção
+      mudar, troque o brinde e a nota em <code>conteudo-primeiro-pedido.mjs</code>.</p>
+    <p class="nota"><strong>Kit inicial (código 0853).</strong> Os quatro produtos são a sugestão de
+      primeiro pedido que estava na landing (Geleia Romã, Deo Colônia Capim-Limão, Kit Caju Viagem e
+      sacolas). Confirme se é esta a cesta do código 0853.</p>
+    <p class="nota"><strong>Benefícios Bronze (aprovar).</strong> O PDF deixa o D16 como
+      "*Benefícios bronze". A lista usada (Domino's, Sem Parar, Buser e Flixbus, CNA e Mondly) é a
+      que estava na versão anterior da régua. O link "Ver todos os benefícios do clube" leva ao
+      Escritório Virtual, onde o clube fica, porque não há página pública do clube.</p>
+    <p class="nota"><strong>Merge tag.</strong> <code>${escPagina(config.tags.nome)}</code> no assunto do
+      D20 e na saudação de todas as peças. Ajuste a sintaxe para a do ESP e defina um valor padrão
+      para o nome.</p>
     <p class="nota">Estas cópias usam as imagens locais. As peças para o ESP estão em
-      <code>dist/primeiro-pedido</code>, com as imagens em <code>${escPagina(config.baseImagens)}</code>.
-      A tabela de assuntos está em <a href="../../primeiro-pedido/assuntos.csv">assuntos.csv</a>.</p>
+      <code>dist/${PASTA}</code>, com as imagens em <code>${escPagina(config.baseImagens)}</code>.
+      A tabela de assuntos está em <a href="../../${PASTA}/assuntos.csv">assuntos.csv</a>.</p>
   </div>
 </body>
 </html>`;

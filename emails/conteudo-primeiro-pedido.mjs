@@ -1,31 +1,38 @@
 /**
- * Régua de Primeiro Pedido: 7 e-mails para quem concluiu o cadastro e ainda não fez
+ * Régua de Primeiro Pedido (V2): 7 e-mails para quem concluiu o cadastro e ainda não fez
  * o primeiro pedido. A revendedora sai da régua quando o pedido é feito.
  *
- * Fonte: "Régua - L'Occitane - Primeiro Pedido" (PDF). Os textos seguem o documento;
- * os pontos que o documento não traz estão marcados com `sugerido` e precisam de
+ * Fonte: "[Correções] Régua - L'Occitane - Primeiro Pedido" (PDF). Os textos seguem o
+ * documento; os pontos que ele não traz estão marcados com `sugerido` e precisam de
  * aprovação da marca:
  *   - o título (H1) de cada peça, já que o layout V2 abre com um H1 sob a capa;
- *   - o preheader do D16, que veio em branco.
+ *   - o brinde: o PDF lista cremes de mãos Brésil (mais de R$ 140), mas o brinde vigente
+ *     é o da arte "Iniciou, ganhou!" (Nosso Abraço, R$ 264,98), que vale para as peças;
+ *   - a lista de benefícios do nível Bronze, que o PDF deixa como "*Benefícios bronze".
  *
- * Kit inicial: sugestão de cesta de best-sellers (não é obrigatório). Brinde: produto
- * grátis que vem automaticamente no primeiro pedido, seja ou não o kit sugerido.
+ * Kit inicial: sugestão de cesta de best-sellers (não é obrigatório), código 0853.
+ * Brinde: produto grátis que vem automaticamente no primeiro pedido, seja ou não o kit.
  */
 import { config as configBase } from "./conteudo.mjs";
 
 export const config = {
   ...configBase,
   urlCta: configBase.urlPedidos,
+  /** O clube fica dentro do Escritório Virtual: não há página pública para ele. */
+  urlClube: configBase.urlPedidos,
   utm: { ...configBase.utm, campaign: "revenda_primeiro_pedido" },
   tags: {
     ...configBase.tags,
-    // Merge tags: ajustar a sintaxe conforme o ESP.
-    nome: "{{NOME}}",
-    clube: "{{URL_CLUBE_BENEFICIOS}}"
+    // Merge tag: ajustar a sintaxe conforme o ESP.
+    nome: "{{NOME}}"
   }
 };
 
+/** Substituído pela URL do CTA (com UTM) na montagem de cada peça. */
+export const URL_CTA = "__URL_CTA__";
+
 const NOME = config.tags.nome;
+const CODIGO_KIT = "0853";
 
 /** Sugestão de kit inicial (best-sellers indicados na landing). */
 const KIT = {
@@ -41,9 +48,32 @@ const KIT = {
 const BRINDE = {
   tipo: "imagem",
   arquivo: "brinde.jpg",
-  alt: "Brinde exclusivo do primeiro pedido L'Occitane au Brésil",
-  altura: 280
+  alt: "Iniciou, ganhou! Faça o seu primeiro pedido e ganhe 1 Sabonete Líquido Corporal Nosso Abraço 200 ml e 1 Deo Colônia Nosso Abraço 75 ml. Seus brindes valem R$ 264,98",
+  largura: 900,
+  altura: 1600,
+  exibir: 320
 };
+
+const BRINDE_ITENS = ["1x Sabonete Líquido Corporal Nosso Abraço 200 ml", "1x Deo Colônia Nosso Abraço 75 ml"];
+const BRINDE_VALOR = "R$&nbsp;264,98";
+
+const NOTA_BRINDE = {
+  tipo: "nota",
+  texto:
+    "Promoção exclusiva para novos revendedores que fizerem o primeiro pedido, válida de 29/10/2026 a 18/11/2026 ou enquanto durarem os estoques. Limitado a 1 uso por CPF. Imagens meramente ilustrativas."
+};
+
+const COMO_PEDIR = [
+  { tipo: "subtitulo", texto: "Como faço o pedido?" },
+  {
+    tipo: "lista",
+    itens: [
+      `Acesse o <a href="${URL_CTA}" class="t-red" style="color:#C02031;font-weight:bold;text-decoration:underline;">Escritório Virtual do Revendedor</a>.`,
+      `Escolha seus produtos favoritos e monte seu pedido. Para adicionar nossa sugestão de kit inicial ao seu carrinho, use o código: <strong>${CODIGO_KIT}</strong>`,
+      "Finalize sua compra!"
+    ]
+  }
+];
 
 const saudacao = (pontuacao = "!") => ({ tipo: "saudacao", texto: `Olá, ${NOME}${pontuacao}` });
 const ASSINATURA = { tipo: "assinatura" };
@@ -59,22 +89,30 @@ export const pecas = [
     preheader: "Kit inicial e brinde exclusivo acompanham o seu primeiro pedido.",
     titulo: "Seu primeiro pedido tem um presente esperando por você",
     sugerido: ["titulo"],
-    capa: { arquivo: "hero-apresentacao.jpg", alt: "Revendedora L'Occitane au Brésil sorrindo com produtos da marca" },
+    capa: { arquivo: "capa-d0.jpg", alt: "Revendedora sorrindo com produtos da linha Caju L'Occitane au Brésil" },
     blocos: [
       saudacao("!"),
       {
         tipo: "texto",
         paragrafos: [
-          "Seja bem-vinda ao Programa de Revendedoras L'Occitane au Brésil! Chegou a sua hora de vender Brasilidade e trilhar um caminho de sucesso junto com a L'Occitane au Brésil!",
-          "Para que esse seu começo seja especial, preparamos um <strong>kit inicial</strong> com os queridinhos dos nossos consumidores, com produtos com alto potencial de venda para você começar a revender com mais confiança desde o primeiro pedido!"
+          "Seja bem-vinda ao programa de Revendedoras! Chegou a sua hora de vender Brasilidade e trilhar um caminho de sucesso junto com a L'Occitane au Brésil!",
+          "Para que esse seu começo seja especial, preparamos uma <strong>sugestão de kit inicial</strong> com os queridinhos dos nossos consumidores, com produtos com alto potencial de venda para você começar a revender com mais confiança desde o primeiro pedido!"
         ]
       },
       KIT,
       { tipo: "texto", paragrafos: ["E tem mais: o seu primeiro pedido também vem acompanhado de um <strong>brinde especial</strong> para você!"] },
       BRINDE,
-      { tipo: "texto", paragrafos: ["Faça seu primeiro pedido e comece a revender com os produtos que já conquistaram o Brasil!"] },
+      ...COMO_PEDIR,
+      {
+        tipo: "texto",
+        paragrafos: [
+          "Lembramos que nosso kit inicial é apenas uma sugestão. Você tem total liberdade de personalizar seu pedido do seu jeito e com os itens que preferir.",
+          "Conclua agora seu primeiro pedido e comece a revender com os produtos que já conquistaram o Brasil!"
+        ]
+      },
       { tipo: "cta", rotulo: "Fazer primeiro pedido" },
-      ASSINATURA
+      ASSINATURA,
+      NOTA_BRINDE
     ]
   },
   {
@@ -84,10 +122,10 @@ export const pecas = [
     etapa: "Brinde",
     gatilho: "Ainda não fez o primeiro pedido",
     assunto: "Seu primeiro pedido tem um brinde especial para você!",
-    preheader: "Escolha seus produtos, finalize a compra e receba um presente exclusivo.",
+    preheader: "Escolha seus produtos, finalize a compra e receba um presente exclusivo",
     titulo: "Um brinde exclusivo no seu primeiro pedido",
-    sugerido: ["titulo"],
-    capa: { arquivo: "hero-confirmacao.jpg", alt: "Creme corporal da linha Romã L'Occitane au Brésil" },
+    sugerido: ["titulo", "brinde"],
+    capa: { arquivo: "capa-d4.jpg", alt: "Caixa de presente L'Occitane au Brésil com produtos da linha Bafafá" },
     blocos: [
       saudacao("!"),
       {
@@ -100,12 +138,18 @@ export const pecas = [
       {
         tipo: "texto",
         paragrafos: [
-          "Além de ser um cuidado para a sua rotina, ele é uma ótima forma de experimentar a qualidade dos nossos produtos e falar sobre eles com propriedade para as suas clientes.",
-          "Para garantir o seu, é simples: escolha os produtos que deseja revender, monte o seu carrinho e finalize o pedido. O brinde chega junto com a sua compra!"
+          "Além de ser um cuidado para a sua rotina, ele é uma ótima forma de experimentar a qualidade dos nossos produtos e falar sobre eles com propriedade para suas clientes."
         ]
       },
+      { tipo: "subtitulo", texto: "O que você ganha:" },
+      { tipo: "lista", itens: BRINDE_ITENS },
+      {
+        tipo: "texto",
+        paragrafos: [`Conclua seu primeiro pedido e ganhe <strong>${BRINDE_VALOR}</strong> em brindes exclusivos!`]
+      },
       { tipo: "cta", rotulo: "Montar meu carrinho" },
-      ASSINATURA
+      ASSINATURA,
+      NOTA_BRINDE
     ]
   },
   {
@@ -116,26 +160,28 @@ export const pecas = [
     gatilho: "Ainda não fez o primeiro pedido",
     assunto: "Os favoritos dos nossos consumidores, direto para suas mãos",
     preheader: "Produtos escolhidos para você apresentar a marca e vender desde o início.",
-    titulo: "Conheça o kit inicial da sua revenda",
+    titulo: "Conheça a nossa sugestão de kit inicial",
     sugerido: ["titulo"],
-    capa: { arquivo: "hero-beneficio.jpg", alt: "Produtos L'Occitane au Brésil em destaque" },
+    capa: { arquivo: "capa-d8.jpg", alt: "Produtos da linha Caju L'Occitane au Brésil" },
     blocos: [
       saudacao(","),
       {
         tipo: "texto",
         paragrafos: [
-          "Você já conhece o brinde que acompanha o seu primeiro pedido. Agora queremos apresentar o outro presente que preparamos para o seu começo: o <strong>kit inicial</strong> da sua revenda."
+          "Você já conhece o brinde que acompanha o seu primeiro pedido. Agora, queremos apresentar uma <strong>sugestão de Kit Inicial</strong> para você dar seus primeiros passos como Revendedora L'Occitane au Brésil com mais confiança e segurança!"
         ]
       },
       KIT,
       {
         tipo: "texto",
         paragrafos: [
-          "Os produtos foram escolhidos entre os mais procurados pelos nossos consumidores. Com eles em mãos, você mostra fragrâncias e texturas às suas clientes, apresenta a marca com segurança e transforma cada demonstração em oportunidade de venda.",
-          "Com o kit e o brinde garantidos, você começa a revenda com tudo o que precisa para encantar suas clientes."
+          "Selecionamos essa sugestão de kit inicial com base nos produtos mais procurados pelos nossos consumidores. Com eles em mãos, você mostra fragrâncias e texturas às suas clientes, apresenta a marca com segurança e transforma cada demonstração em oportunidade de venda.",
+          "Com a nossa sugestão de kit e o brinde garantidos, você começa a revenda com tudo o que precisa para encantar suas clientes!",
+          "Vale destacar que o kit é apenas uma sugestão. Você tem total liberdade de personalizar seu pedido do seu jeito e com os itens que preferir."
         ]
       },
-      { tipo: "cta", rotulo: "Garantir meu kit inicial" },
+      ...COMO_PEDIR,
+      { tipo: "cta", rotulo: "Montar meu primeiro pedido" },
       ASSINATURA
     ]
   },
@@ -146,43 +192,25 @@ export const pecas = [
     etapa: "Mecânicas e vantagens de cada nível",
     gatilho: "Ainda não fez o primeiro pedido",
     assunto: "Quanto mais você vende, maior seu lucro!",
-    preheader: "Do bronze ao diamante, veja como evoluir na sua revenda.",
+    preheader: "Do bronze ao diamante, veja como evoluir na sua revenda",
     titulo: "Quanto mais você vende, maior o seu lucro",
     sugerido: ["titulo"],
-    capa: { arquivo: "hero-calculadora.jpg", alt: "Produtos da linha Capim-Limão L'Occitane au Brésil" },
+    capa: { arquivo: "capa-d12.jpg", alt: "Produtos da linha Pudim L'Occitane au Brésil" },
     blocos: [
       saudacao(","),
       {
         tipo: "texto",
         paragrafos: [
           "A sua revenda L'Occitane au Brésil conta com o <strong>Plano de Crescimento</strong>, um modelo em que o seu lucro aumenta conforme as suas vendas evoluem.",
-          "Toda revendedora começa no nível Bronze, com 20% de lucro. A partir daí, o valor das suas compras define até onde você pode chegar:"
+          "Você começa no nível Bronze, com 20% de lucro. A partir daí, o valor das suas compras define até onde você pode chegar:"
         ]
       },
       { tipo: "niveis" },
-      { tipo: "subtitulo", texto: "Dois caminhos para crescer" },
       {
-        tipo: "pilares",
-        itens: [
-          {
-            titulo: "Dentro do ciclo",
-            texto: "Ao atingir o valor de uma faixa dentro de um ciclo, você sobe de nível automaticamente a partir do ciclo seguinte."
-          },
-          {
-            titulo: "No Período de Apuração",
-            texto: "Seus pedidos também se somam ao longo do Período de Apuração, que reúne quatro ciclos. Ao final dele, o valor total define o seu nível no período seguinte: você pode subir, se manter ou descer."
-          }
+        tipo: "texto",
+        paragrafos: [
+          "Além de aumentar seu lucro a cada nível, você também conquista vantagens e promoções cada vez maiores no nosso <strong>Clube de Benefícios</strong> exclusivo!"
         ]
-      },
-      {
-        tipo: "destaque",
-        titulo: "Na prática",
-        texto: "Com R$ 500 em pedidos por ciclo, você soma R$ 2.000 no período e começa o próximo no nível <strong>Prata</strong>. Com R$ 1.500 por ciclo, chega ao <strong>Ouro</strong>. Com R$ 5.000, ao <strong>Diamante</strong>."
-      },
-      {
-        tipo: "destaque",
-        titulo: "Fique atenta",
-        texto: "Para que o pedido conte no plano, o boleto à vista precisa estar pago e aprovado até o último dia do ciclo."
       },
       { tipo: "cta", rotulo: "Começar meu Plano de Crescimento" },
       ASSINATURA
@@ -195,47 +223,37 @@ export const pecas = [
     etapa: "Benefícios por nível",
     gatilho: "Ainda não fez o primeiro pedido",
     assunto: "Um clube de benefícios exclusivo para você!",
-    preheader: "Descontos em marcas parceiras que aumentam a cada nível da sua revenda.",
+    preheader: "Confira todas as vantagens por nível que te esperam",
     titulo: "Um clube de benefícios que cresce com você",
-    sugerido: ["titulo", "preheader"],
-    capa: { arquivo: "hero-overview.jpg", alt: "Perfume Brésil da L'Occitane au Brésil com pimenta-rosa" },
+    sugerido: ["titulo", "beneficios"],
+    capa: { arquivo: "capa-d16.jpg", alt: "Revendedora sorrindo com produtos da linha Romã L'Occitane au Brésil" },
     blocos: [
       saudacao(","),
       {
         tipo: "texto",
         paragrafos: [
-          "Além do lucro em cada venda, a sua revenda L'Occitane au Brésil dá acesso a um <strong>clube de benefícios</strong> com descontos em marcas parceiras para o seu dia a dia. E, assim como o seu lucro, as vantagens aumentam a cada nível do Plano de Crescimento."
+          "Além do lucro em cada venda, a sua revenda L'Occitane au Brésil dá acesso a um <strong>clube de benefícios</strong> com descontos em marcas parceiras para o seu dia a dia. E, assim como o seu lucro, as vantagens aumentam a cada nível do Plano de Crescimento.",
+          "Confira as promoções e descontos que já estão disponíveis para você no nível Bronze:"
         ]
       },
       {
         tipo: "beneficios",
+        nivel: "Bronze",
         itens: [
-          {
-            nivel: "Bronze",
-            texto: "Desde o início, você aproveita descontos em parceiros como Domino's (30% off), Sem Parar (98% off por 3 meses), Buser e Flixbus (15% off), além de cursos de idiomas no CNA e no Mondly."
-          },
-          {
-            nivel: "Prata",
-            texto: "Chegam as marcas de moda e esporte: até 80% off na Dafiti, até 25% off em todo o site do Extra.com, 28% off na Conquer e descontos na Netshoes, na Mizuno e na Fila."
-          },
-          {
-            nivel: "Ouro",
-            texto: "O clube ganha viagens, lazer e educação: até R$ 200 de desconto na Decolar, até 40% off em cinemas, 70% off na Open English, até 67% off na Wizard e planos da Alia Seguros a partir de R$ 39,90 por mês."
-          },
-          {
-            nivel: "Diamante",
-            texto: "O nível mais alto reúne parceiros premium: até 30% off em Canon e Panasonic, 22% off no Thermas da Mata, 15% off na Meliá Hotéis e condições exclusivas na Vivara e na Chandon."
-          }
+          { parceiro: "Domino's", oferta: "30% off" },
+          { parceiro: "Sem Parar", oferta: "98% off por 3 meses" },
+          { parceiro: "Buser e Flixbus", oferta: "15% off" },
+          { parceiro: "CNA e Mondly", oferta: "descontos em cursos de idiomas" }
         ]
       },
       {
         tipo: "texto",
         paragrafos: [
-          "E os benefícios se acumulam: a cada nível conquistado, você mantém as vantagens anteriores e desbloqueia novas."
+          "Os benefícios se acumulam: a cada nível conquistado, você mantém as vantagens anteriores e desbloqueia novas."
         ]
       },
       { tipo: "cta", rotulo: "Fazer meu primeiro pedido" },
-      { tipo: "link", rotulo: "Ver todos os benefícios do clube", url: config.tags.clube },
+      { tipo: "link", rotulo: "Ver todos os benefícios do clube", url: config.urlClube },
       {
         tipo: "texto",
         paragrafos: [
@@ -255,7 +273,7 @@ export const pecas = [
     preheader: "Nosso kit inicial e brinde exclusivo te esperam!",
     titulo: "Seu kit e seu brinde continuam esperando por você",
     sugerido: ["titulo"],
-    capa: { arquivo: "hero-marca.jpg", alt: "Parede de produtos L'Occitane au Brésil", altura: 460 },
+    capa: { arquivo: "capa-d20.jpg", alt: "Produtos das linhas Chamego e Bafafá L'Occitane au Brésil" },
     blocos: [
       saudacao(","),
       {
@@ -275,7 +293,8 @@ export const pecas = [
       },
       { tipo: "cta", rotulo: "Garantir meu kit e meu brinde" },
       { tipo: "texto", paragrafos: ["Seus presentes estão esperando. Aproveite agora!"] },
-      ASSINATURA
+      ASSINATURA,
+      NOTA_BRINDE
     ]
   },
   {
@@ -285,10 +304,10 @@ export const pecas = [
     etapa: "Depoimentos",
     gatilho: "Ainda não fez o primeiro pedido",
     assunto: "Elas já deram o primeiro passo, agora é sua vez!",
-    preheader: "Inspire-se com histórias reais de quem já vende nossa Brasilidade.",
+    preheader: "Inspire-se com histórias reais de quem já vende nossa Brasilidade",
     titulo: "Elas já deram o primeiro passo. Agora é a sua vez",
     sugerido: ["titulo"],
-    capa: { arquivo: "hero-prova-social.jpg", alt: "Produtos da linha Romã L'Occitane au Brésil sobre fundo rosa" },
+    capa: { arquivo: "capa-d24.jpg", alt: "Revendedora sorrindo com o perfume Brésil L'Occitane au Brésil" },
     blocos: [
       saudacao(","),
       {

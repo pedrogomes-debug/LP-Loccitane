@@ -24,23 +24,24 @@ segue pronta e válida, disponível para um teste A/B de conteúdo ou para as pr
 ## Régua de Primeiro Pedido (V2)
 
 Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido (D0, D4, D8, D12,
-D16, D20 e D24). A revendedora sai da régua quando faz o pedido. Fonte: PDF "Régua - L'Occitane -
-Primeiro Pedido".
+D16, D20 e D24). A revendedora sai da régua quando faz o pedido. Fonte: PDF "[Correções] Régua -
+L'Occitane - Primeiro Pedido".
 
 - `conteudo-primeiro-pedido.mjs` — textos, assuntos, preheaders e códigos de cada peça
-- `build-primeiro-pedido.mjs` — monta as peças com cabeçalho e rodapé do modelo V2 da confirmação
-- `preparar-imagens-primeiro-pedido.mjs` — fotos do kit e imagem provisória do brinde, em
-  `assets-primeiro-pedido/` (no CDN, sobem para a mesma pasta de `assets/`)
-- Saídas: `dist/primeiro-pedido/` (ESP, `.html` + `.txt` + `assuntos.csv`) e
-  `dist/preview/primeiro-pedido/index.html` (aprovação)
+- `build-primeiro-pedido.mjs` — monta as peças com o cabeçalho do modelo V2 da confirmação
+- `preparar-imagens-primeiro-pedido.mjs` — capas (fotos das linhas do WeTransfer "outras-linhas"),
+  recorte do brinde (arte "Iniciou, ganhou!") e fotos do kit, em `assets-primeiro-pedido/`
+  (no CDN, sobem para a mesma pasta de `assets/`)
+- Saídas: `dist/primeiro-pedido-v2/` (ESP, `.html` + `.txt` + `assuntos.csv`) e
+  `dist/preview/primeiro-pedido-v2/index.html` (aprovação)
 
 As peças saem sem rodapé (sem descadastro, dados da empresa e "Abra no navegador"): o link de
 descadastro e o endereço do remetente precisam ser incluídos pelo ESP no envio.
 
-Para regerar: `npm run emails:primeiro-pedido`. Pendências: foto real do brinde (substituir
-`assets-primeiro-pedido/brinde.jpg`, 1072x560), confirmação dos SKUs do kit, merge tags
-`{{NOME}}` e `{{URL_CLUBE_BENEFICIOS}}`, e aprovação dos H1 e do preheader do D16, que o documento
-não traz.
+Para regerar: `npm run emails:primeiro-pedido`. Pendências de aprovação: o brinde (as peças usam o
+Nosso Abraço da arte vigente, e não os cremes de mãos do PDF), a cesta do kit 0853, a lista de
+benefícios do Bronze no D16 (o PDF traz só "*Benefícios bronze") e os H1, que o documento não traz.
+O link "Ver todos os benefícios do clube" aponta para o Escritório Virtual.
 
 ## V2 — layout rosa (vigente)
 

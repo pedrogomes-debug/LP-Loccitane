@@ -19,7 +19,7 @@ const PASTAS = [
   { pasta: "criativos", tamanhos: [["desktop", 700], ["mobile", 390]] },
   { pasta: "por-disparo", tamanhos: [["desktop", 700]] },
   { pasta: "V2/por-momento", tamanhos: [["desktop", 700], ["mobile", 390]] },
-  { pasta: "primeiro-pedido", tamanhos: [["desktop", 700], ["mobile", 390]] }
+  { pasta: "primeiro-pedido-v2", tamanhos: [["desktop", 700], ["mobile", 390]] }
 ];
 
 const navegador = await puppeteer.launch({
