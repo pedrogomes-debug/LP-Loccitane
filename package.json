@@ -9,6 +9,8 @@
     "emails:aprovar-v2": "start emails/dist/preview/V2/index.html",
     "emails:primeiro-pedido": "node emails/preparar-imagens-primeiro-pedido.mjs && node emails/build-primeiro-pedido.mjs",
     "emails:aprovar-primeiro-pedido": "start emails/dist/preview/primeiro-pedido-v2/index.html",
+    "emails:crm": "node emails/preparar-imagens-crm.mjs && node emails/build-crm.mjs",
+    "emails:aprovar-crm": "start emails/dist/preview/crm/index.html",
     "emails:preview": "node emails/screenshots.mjs",
     "emails:aprovar": "start emails/dist/preview/index.html",
     "emails": "npm run emails:imagens && npm run emails:build && npm run emails:v2 && npm run emails:primeiro-pedido",

@@ -43,6 +43,22 @@ Nosso Abraço da arte vigente, e não os cremes de mãos do PDF), a cesta do kit
 benefícios do Bronze no D16 (o PDF traz só "*Benefícios bronze") e os H1, que o documento não traz.
 O link "Ver todos os benefícios do clube" aponta para o Escritório Virtual.
 
+## Régua CRM (Jornada Inícios)
+
+Cinco e-mails de relacionamento depois do primeiro pedido: D+0 Boas-vindas, D+1 Aniversário,
+D+30 Dicas de venda, INA 04/INA 06 (60 dias sem pedido) e Comportamento (subiu para o Prata).
+Fonte: PDF "Jornada Inícios - Revenda L'Occitane".
+
+- `conteudo-crm.mjs` — textos, assuntos, preheaders e códigos de cada peça
+- `build-crm.mjs` — monta as peças no layout V2, como a régua de Primeiro Pedido
+- `preparar-imagens-crm.mjs` — capas e fotos dos best sellers a partir dos zips extraídos em
+  `E:/crm-imagens-origem`, em `assets-crm/` (no CDN, sobem para a mesma pasta de `assets/`)
+- Saídas: `dist/crm/` (ESP) e `dist/preview/crm/index.html` (aprovação)
+
+Para regerar: `npm run emails:crm`. Pendências de aprovação: os H1, a tabela de níveis no lugar da
+"[IMAGEM NÍVEIS E VALORES?]" do D+0, a assinatura do INA e a capa do Prata (sem foto; usa a
+capa Romã da régua de Primeiro Pedido).
+
 ## V2 — layout rosa (vigente)
 
 Os criativos V2 foram ajustados à mão e ficam em `modelos-v2/`. O `build-v2.mjs` (`npm run emails:v2`)

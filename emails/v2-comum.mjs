@@ -21,16 +21,22 @@ export const entrelinha = (tamanho) => Math.round(tamanho * 1.26);
  * cabe numa linha; se não couber, 24px em duas linhas. Retorna null sem puppeteer.
  */
 export async function criarMedidor() {
+  if (process.env.SEM_MEDIDOR) return null;
   let puppeteer;
   try {
     puppeteer = (await import("puppeteer")).default;
   } catch {
     return null;
   }
-  const navegador = await puppeteer.launch({
-    headless: true,
-    ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {})
-  });
+  let navegador;
+  try {
+    navegador = await puppeteer.launch({
+      headless: true,
+      ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {})
+    });
+  } catch {
+    return null;
+  }
   const pagina = await navegador.newPage();
 
   const linhas = (html, tamanho) =>

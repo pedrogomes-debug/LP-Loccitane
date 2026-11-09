@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aprovação — Régua CRM (Jornada Inícios)</title>
+<style>
+  :root { --red:#C02031; --ink:#2B1A13; --muted:#6E564A; --line:#E7D8C8; --cream:#FBF1E6; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 24px 64px; background:#F7F0E8; color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-size:1.9rem; margin:0 0 .3rem; color:var(--red); }
+  h2 { font-size:1.15rem; margin:2.5rem 0 .9rem; }
+  .intro { color:var(--muted); max-width:75ch; margin:0 0 .4rem; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);
+    vertical-align:top; font-size:.9rem; }
+  th { background:var(--cream); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); }
+  tr:last-child td { border-bottom:0; }
+  code { font-size:.78rem; background:var(--cream); padding:2px 6px; border-radius:5px; }
+  .num { color:var(--muted); font-variant-numeric:tabular-nums; }
+  .meta { display:block; margin-top:5px; font-size:.78rem; color:var(--muted); }
+  .rotulo { display:block; margin-top:9px; font-size:.7rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); }
+  .rotulo:first-child { margin-top:0; }
+  .sugerido { text-transform:none; letter-spacing:0; color:#B4551A; font-weight:600; }
+  .contagem { display:block; font-size:.76rem; color:var(--muted); }
+  .contagem--alerta { color:#B4551A; font-weight:600; }
+  .acoes { white-space:nowrap; }
+  .acoes a { display:block; font-size:.85rem; color:var(--red); }
+  .botao { display:inline-block !important; margin-bottom:8px; padding:8px 14px; border-radius:999px;
+    background:var(--red); color:#fff !important; text-decoration:none; font-weight:600; }
+  .nota { margin-top:1.2rem; padding:14px 16px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; font-size:.86rem; color:var(--muted); }
+  .nota strong { color:var(--ink); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Régua CRM — Jornada Inícios</h1>
+    <p class="intro">E-mails de relacionamento com a revendedora depois do primeiro pedido: boas-vindas,
+      aniversário, dicas de venda, inatividade e subida para o nível Prata. Textos conforme o PDF
+      "Jornada Inícios - Revenda L'Occitane", no layout V2 (corpo rosa) com o cabeçalho da
+      confirmação de cadastro.</p>
+
+    <h2>5 disparos</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Código do template</th><th>Gatilho</th><th>Textos do disparo</th><th>Peça</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><code>LOCCITANE_CRM_D0_BOAS_VINDAS</code><span class="meta">D+0 &middot; Boas-vindas + resumo do Plano de Crescimento + pontos de apoio (Líder e SAC)</span></td>
+          <td>Primeiro pedido realizado</td>
+          <td>
+            <span class="rotulo">Assunto</span>Do Bronze ao Diamante: sua jornada começa agora
+            <span class="contagem">47 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Do Bronze ao Diamante: sua jornada começa agora
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Veja como aumentar seu lucro e desbloquear benefícios exclusivos
+          </td>
+          <td class="acoes">
+            <a class="botao" href="01-d0-boas-vindas.html">Abrir peça</a>
+            <a href="../../crm/01-d0-boas-vindas.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><code>LOCCITANE_CRM_D1_ANIVERSARIO</code><span class="meta">D+1 &middot; Relacionamento com a base aniversariante</span></td>
+          <td>Aniversário da revendedora no mês</td>
+          <td>
+            <span class="rotulo">Assunto</span>{{NOME}}, este mês é todo seu!
+            <span class="contagem">30 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Feliz aniversário! Bon anniversaire!
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Hoje, celebramos seu dia e tudo que você constrói com nossa marca
+          </td>
+          <td class="acoes">
+            <a class="botao" href="02-d1-aniversario.html">Abrir peça</a>
+            <a href="../../crm/02-d1-aniversario.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><code>LOCCITANE_CRM_D30_DICAS_DE_VENDA</code><span class="meta">D+30 &middot; Dicas de venda, best sellers e claims por ocasião</span></td>
+          <td>30 dias após o primeiro pedido</td>
+          <td>
+            <span class="rotulo">Assunto</span>Conheça nossos campeões de venda
+            <span class="contagem">32 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Conheça nossos campeões de venda
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Três best sellers e estratégias para vendê-los
+          </td>
+          <td class="acoes">
+            <a class="botao" href="03-d30-dicas-de-venda.html">Abrir peça</a>
+            <a href="../../crm/03-d30-dicas-de-venda.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><code>LOCCITANE_CRM_INA_SUBA_DE_NIVEL</code><span class="meta">INA 04 e INA 06 &middot; Inatividade: 60 dias sem novos pedidos</span></td>
+          <td>60 dias sem passar novos pedidos</td>
+          <td>
+            <span class="rotulo">Assunto</span>Suba de nível e aumente seu lucro
+            <span class="contagem">33 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Suba de nível e aumente seu lucro
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Veja como chegar ao nível Prata e desbloquear novos benefícios
+          </td>
+          <td class="acoes">
+            <a class="botao" href="04-ina-suba-de-nivel.html">Abrir peça</a>
+            <a href="../../crm/04-ina-suba-de-nivel.txt">Versão texto</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td><code>LOCCITANE_CRM_NIVEL_PRATA</code><span class="meta">Comportamento &middot; Subiu para o nível Prata</span></td>
+          <td>Revendedora atingiu o nível Prata</td>
+          <td>
+            <span class="rotulo">Assunto</span>Parabéns! Você chegou ao nível Prata
+            <span class="contagem">36 caracteres</span>
+            <span class="rotulo">Título (H1) <span class="sugerido">sugestão — aprovar</span></span>Parabéns! Você chegou ao nível Prata
+            <span class="contagem">24px, em duas linhas</span>
+            <span class="rotulo">Preheader</span>Confira os novos benefícios disponíveis para você
+          </td>
+          <td class="acoes">
+            <a class="botao" href="05-comportamento-nivel-prata.html">Abrir peça</a>
+            <a href="../../crm/05-comportamento-nivel-prata.txt">Versão texto</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="nota"><strong>Níveis no D+0 (aprovar).</strong> O PDF marca "[IMAGEM NÍVEIS E VALORES?]".
+      A peça usa a tabela de níveis da régua de Primeiro Pedido (Bronze a Diamante, faixas e % de
+      lucro), em HTML, que continua legível com as imagens bloqueadas.</p>
+    <p class="nota"><strong>Aniversário (D+1).</strong> Sem CTA e sem benefício: a planilha não prevê
+      benefício para aniversariante. A peça não tem link rastreado.</p>
+    <p class="nota"><strong>INA 04 e INA 06.</strong> Mesma peça para os dois disparos, como na planilha.
+      O PDF não traz a assinatura nesta peça; ela foi incluída para manter o padrão (aprovar).</p>
+    <p class="nota"><strong>Nível Prata (aprovar).</strong> Não veio pasta de imagens para esta peça;
+      a capa precisa ser definida.</p>
+    <p class="nota"><strong>Merge tag.</strong> <code>{{NOME}}</code> no assunto do
+      D+1 e na saudação de todas as peças. Ajuste a sintaxe para a do ESP e defina um valor padrão
+      para o nome.</p>
+    <p class="nota">Estas cópias usam as imagens locais. As peças para o ESP estão em
+      <code>dist/crm</code>, com as imagens em <code>https://SEU-DOMINIO.com.br/email/revenda</code>.
+      A tabela de assuntos está em <a href="../../crm/assuntos.csv">assuntos.csv</a>.</p>
+  </div>
+</body>
+</html>
