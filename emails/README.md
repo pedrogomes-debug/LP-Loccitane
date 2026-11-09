@@ -50,7 +50,8 @@ D+30 Dicas de venda, INA 04/INA 06 (60 dias sem pedido) e Comportamento (subiu p
 Fonte: PDF "Jornada Inícios - Revenda L'Occitane".
 
 - `conteudo-crm.mjs` — textos, assuntos, preheaders e códigos de cada peça
-- `build-crm.mjs` — monta as peças no layout V2, como a régua de Primeiro Pedido
+- `build-crm.mjs` — monta as peças no layout V2 com `regua-v2.mjs` (componentes compartilhados
+  com a régua de Leads)
 - `preparar-imagens-crm.mjs` — capas e fotos dos best sellers a partir dos zips extraídos em
   `E:/crm-imagens-origem`, em `assets-crm/` (no CDN, sobem para a mesma pasta de `assets/`)
 - Saídas: `dist/crm/` (ESP) e `dist/preview/crm/index.html` (aprovação)
@@ -58,6 +59,22 @@ Fonte: PDF "Jornada Inícios - Revenda L'Occitane".
 Para regerar: `npm run emails:crm`. Pendências de aprovação: os H1, a tabela de níveis no lugar da
 "[IMAGEM NÍVEIS E VALORES?]" do D+0, a assinatura do INA e a capa do Prata (sem foto; usa a
 capa Romã da régua de Primeiro Pedido).
+
+## Régua de Intenções (Leads)
+
+Cinco e-mails para quem se cadastrou e ainda não fez o primeiro pedido, com e sem documentação
+completa: D+1 Boas-vindas, D+3 Principais dúvidas, D+5 Quais produtos vender, D+8 Benefícios e
+Plano de Crescimento e D+10 Renda extra. Fonte: PDF "L'Occitane - Jornada - Intencoes_Leads".
+
+- `conteudo-leads.mjs` — textos, assuntos, preheaders e códigos de cada peça
+- `build-leads.mjs` — monta as peças com `regua-v2.mjs`
+- `preparar-imagens-leads.mjs` — capas e fotos dos best sellers a partir de `E:/imagens_leads`,
+  em `assets-leads/`
+- Saídas: `dist/leads/` (ESP) e `dist/preview/leads/index.html` (aprovação)
+
+Para regerar: `npm run emails:leads`. Pendências de aprovação: os H1, a saudação e a assinatura do
+D+8 e a assinatura do D+5, que o PDF não traz. Os trechos soltos das páginas finais do PDF não
+entraram nas peças.
 
 ## V2 — layout rosa (vigente)
 
