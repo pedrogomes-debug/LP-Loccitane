@@ -62,6 +62,29 @@ export async function criarMedidor() {
   };
 }
 
+/**
+ * Corpo do H1 já gravado em cada peça de `pasta`, por arquivo, quando o título não mudou.
+ * Serve de reserva para quando o medidor não está disponível, para o build não trocar
+ * os tamanhos medidos antes pelo padrão de duas linhas.
+ */
+export async function lerH1Anteriores(pasta, pecas) {
+  const { readFile } = await import("node:fs/promises");
+  const anteriores = new Map();
+  for (const peca of pecas) {
+    let html;
+    try {
+      html = await readFile(`${pasta}/${peca.arquivo}.html`, "utf8");
+    } catch {
+      continue;
+    }
+    const h1 = html.match(/<h1\b[^>]*font-size:(\d+)px;line-height:(\d+)px;[^>]*>([\s\S]*?)<\/h1>/);
+    if (h1 && h1[3] === marcaInteira(esc(peca.titulo))) {
+      anteriores.set(peca.arquivo, { tamanho: Number(h1[1]), entrelinha: Number(h1[2]) });
+    }
+  }
+  return anteriores;
+}
+
 /** Corpo do HTML → texto puro, para a parte text/plain do multipart. */
 export function paraTexto(html, preheader) {
   const corpo = html

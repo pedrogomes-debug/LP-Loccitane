@@ -374,7 +374,7 @@ function paginaAprovacao({ itens, pasta, config, pagina }) {
 <body>
   <div class="wrap">
     <h1>${escPagina(pagina.titulo)}</h1>
-    <p class="intro">${pagina.intro}</p>
+    <!--<p class="intro">${pagina.intro}</p>-->
 
     <h2>${itens.length} disparos</h2>
     <table>
@@ -386,12 +386,14 @@ ${linhas}
       </tbody>
     </table>
 
+    <!--
 ${pagina.notas.map((nota) => `    <p class="nota">${nota}</p>`).join("\n")}
     <p class="nota"><strong>Merge tag.</strong> <code>${escPagina(config.tags.nome)}</code> no assunto e
       na saudação das peças. Ajuste a sintaxe para a do ESP e defina um valor padrão para o nome.</p>
     <p class="nota">Estas cópias usam as imagens locais. As peças para o ESP estão em
       <code>dist/${pasta}</code>, com as imagens em <code>${escPagina(config.baseImagens)}</code>.
       A tabela de assuntos está em <a href="../../${pasta}/assuntos.csv">assuntos.csv</a>.</p>
+    -->
   </div>
 </body>
 </html>`;

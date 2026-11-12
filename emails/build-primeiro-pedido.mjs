@@ -13,7 +13,7 @@
 import { mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { URL_CTA, config, pecas } from "./conteudo-primeiro-pedido.mjs";
-import { H1_DUAS_LINHAS, criarMedidor, esc, marcaInteira, paraTexto } from "./v2-comum.mjs";
+import { H1_DUAS_LINHAS, criarMedidor, esc, lerH1Anteriores, marcaInteira, paraTexto } from "./v2-comum.mjs";
 
 const SHELL = "emails/modelos-v2/confirmacao-de-cadastro.html";
 const PASTA = "primeiro-pedido-v2";
@@ -283,10 +283,10 @@ async function lerShell() {
   return { antes: html.slice(0, fimCabecalho), depois };
 }
 
-async function montarPeca(peca, shell, medidor) {
+async function montarPeca(peca, shell, medidor, h1Anteriores) {
   const urlCta = atributo(comUtm(config.urlCta, peca.codigo));
   const tituloHtml = marcaInteira(esc(peca.titulo));
-  const corpoH1 = medidor ? await medidor.corpo(tituloHtml) : H1_DUAS_LINHAS;
+  const corpoH1 = medidor ? await medidor.corpo(tituloHtml) : h1Anteriores.get(peca.arquivo) ?? H1_DUAS_LINHAS;
 
   const blocos = peca.blocos
     .map(
@@ -409,9 +409,9 @@ function paginaAprovacao(itens) {
 <body>
   <div class="wrap">
     <h1>Régua de Primeiro Pedido — V2</h1>
-    <p class="intro">Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido.
+    <!--<p class="intro">Sete e-mails para quem concluiu o cadastro e ainda não fez o primeiro pedido.
       A revendedora sai da régua assim que o pedido é feito. Textos conforme o PDF de correções,
-      no layout V2 (corpo rosa) com o cabeçalho da confirmação de cadastro.</p>
+      no layout V2 (corpo rosa) com o cabeçalho da confirmação de cadastro.</p>-->
 
     <h2>${itens.length} disparos</h2>
     <table>
@@ -423,15 +423,14 @@ ${linhas}
       </tbody>
     </table>
 
-    <p class="nota"><strong>Brinde (aprovar).</strong> O PDF lista cremes de mãos Brésil e "mais de
+    <!--<p class="nota"><strong>Brinde (aprovar).</strong> O PDF lista cremes de mãos Brésil e "mais de
       R$ 140", mas as peças usam o brinde vigente da arte "Iniciou, ganhou!": Sabonete Líquido
       Corporal Nosso Abraço 200 ml e Deo Colônia Nosso Abraço 75 ml, R$ 264,98. A foto é o recorte
       dos produtos da arte, e o texto legal dela (validade de 29/10/2026 a 18/11/2026, 1 uso por CPF)
       entra em letra miúda no fim das peças que mostram o brinde (D0, D4 e D20). Quando a promoção
       mudar, troque o brinde e a nota em <code>conteudo-primeiro-pedido.mjs</code>.</p>
-    <p class="nota"><strong>Kit inicial (código 0853).</strong> Os quatro produtos são a sugestão de
-      primeiro pedido que estava na landing (Geleia Romã, Deo Colônia Capim-Limão, Kit Caju Viagem e
-      sacolas). Confirme se é esta a cesta do código 0853.</p>
+    <p class="nota"><strong>Kit inicial (código 0853).</strong> As peças D0, D8 e D20 usam a arte
+      "Sugestão Kit Inicial" com todos os produtos da cesta.</p>
     <p class="nota"><strong>Benefícios Bronze (aprovar).</strong> O PDF deixa o D16 como
       "*Benefícios bronze". A lista usada (Domino's, Sem Parar, Buser e Flixbus, CNA e Mondly) é a
       que estava na versão anterior da régua. O link "Ver todos os benefícios do clube" leva ao
@@ -441,13 +440,14 @@ ${linhas}
       para o nome.</p>
     <p class="nota">Estas cópias usam as imagens locais. As peças para o ESP estão em
       <code>dist/${PASTA}</code>, com as imagens em <code>${escPagina(config.baseImagens)}</code>.
-      A tabela de assuntos está em <a href="../../${PASTA}/assuntos.csv">assuntos.csv</a>.</p>
+      A tabela de assuntos está em <a href="../../${PASTA}/assuntos.csv">assuntos.csv</a>.</p>-->
   </div>
 </body>
 </html>`;
 }
 
 async function main() {
+  const h1Anteriores = await lerH1Anteriores(DIST, pecas);
   await rm(DIST, { recursive: true, force: true });
   await rm(PREVIEW, { recursive: true, force: true });
   await mkdir(DIST, { recursive: true });
@@ -455,13 +455,13 @@ async function main() {
 
   const shell = await lerShell();
   const medidor = await criarMedidor();
-  if (!medidor) console.log("puppeteer indisponível: todos os H1 saem em 24px.\n");
+  if (!medidor) console.log("puppeteer indisponível: os H1 mantêm o tamanho da última geração (títulos novos saem em 24px).\n");
 
   const itens = [];
   const relatorio = [];
   try {
     for (const peca of pecas) {
-      const { html, corpoH1 } = await montarPeca(peca, shell, medidor);
+      const { html, corpoH1 } = await montarPeca(peca, shell, medidor, h1Anteriores);
       const producao = caminhos(html, `${config.baseImagens}/`, `${config.baseImagens}/`);
       const previa = caminhos(html, "../../../assets/", "../../../assets-primeiro-pedido/");
 

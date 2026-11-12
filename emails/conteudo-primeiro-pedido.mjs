@@ -34,15 +34,13 @@ export const URL_CTA = "__URL_CTA__";
 const NOME = config.tags.nome;
 const CODIGO_KIT = "0853";
 
-/** Sugestão de kit inicial (best-sellers indicados na landing). */
+/** Sugestão de kit inicial: arte com todos os produtos da cesta. */
 const KIT = {
-  tipo: "produtos",
-  itens: [
-    { arquivo: "kit-geleia-roma.jpg", nome: "Geleia Hidratante Romã 200 ml", alt: "Geleia Hidratante Corporal Romã 200 ml" },
-    { arquivo: "kit-deo-capim.jpg", nome: "Deo Colônia Capim-Limão 100 ml", alt: "Deo Colônia Capim-Limão 100 ml" },
-    { arquivo: "kit-caju-viagem.jpg", nome: "Kit Caju Viagem", alt: "Kit Caju Viagem com creme e óleo corporal" },
-    { arquivo: "kit-sacolas.jpg", nome: "Sacolas para entrega", alt: "Sacola de presente L'Occitane au Brésil" }
-  ]
+  tipo: "imagem",
+  arquivo: "kit-inicial.jpg",
+  alt: "Sugestão de kit inicial: Geleia Hidratante Romã, Deo Colônia Capim-Limão, Spray Perfumado Romã, Mist Bafafá, produtos da linha Caju e sacola de presente L'Occitane au Brésil",
+  largura: 651,
+  altura: 537
 };
 
 const BRINDE = {

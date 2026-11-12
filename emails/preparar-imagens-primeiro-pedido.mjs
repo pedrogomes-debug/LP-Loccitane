@@ -9,8 +9,9 @@
  *   exibir a 600x300.
  * - Brinde: a arte "Iniciou, ganhou!" (Nosso Abraço) inteira, a 640px de largura
  *   para exibir a 320px.
- * - Kit inicial: os quatro produtos sugeridos na landing, exibidos a 128px no desktop
- *   e até ~175px no celular; arquivo a 300px.
+ * - Kit inicial: a arte "Sugestão Kit Inicial" com todos os produtos, exibida a 536px.
+ *   As fotos avulsas dos quatro produtos (kit-*.jpg) seguem sendo geradas, mas as peças
+ *   não as usam mais.
  *
  * As fontes ficam fora do repositório; se a pasta mudar, ajuste FOTOS e ARTE_BRINDE.
  *
@@ -23,6 +24,7 @@ import path from "node:path";
 const ORIGEM = "assets/web";
 const FOTOS = "E:/wetransfer_outras-linhas_2026-10-30_1852 (1)";
 const ARTE_BRINDE = "E:/WhatsApp Image 2026-10-29 at 17.59.19.jpeg";
+const ARTE_KIT = "E:/imagens-primeiro-pedido/sugestao-kit-inicial.jpg";
 const DESTINO = "emails/assets-primeiro-pedido";
 
 /** Rosa do corpo da peça V2: as quinas transparentes dos packs somem no fundo. */
@@ -71,11 +73,17 @@ async function gerarBrinde() {
   await jpeg(sharp(ARTE_BRINDE).resize(640), 82).toFile(path.join(DESTINO, "brinde.jpg"));
 }
 
+/** A arte tem 651px de largura: sai no tamanho original para exibir a 536px. */
+async function gerarKit() {
+  await jpeg(sharp(ARTE_KIT).flatten({ background: "#FFFFFF" }), 85).toFile(path.join(DESTINO, "kit-inicial.jpg"));
+}
+
 await rm(DESTINO, { recursive: true, force: true });
 await mkdir(DESTINO, { recursive: true });
 await gerarProdutos();
 await gerarCapas();
 await gerarBrinde();
+await gerarKit();
 
 for (const arquivo of (await readdir(DESTINO)).sort()) {
   const { size } = await stat(path.join(DESTINO, arquivo));
