@@ -39,7 +39,7 @@ As peças saem sem rodapé (sem descadastro, dados da empresa e "Abra no navegad
 descadastro e o endereço do remetente precisam ser incluídos pelo ESP no envio.
 
 Para regerar: `npm run emails:primeiro-pedido`. Pendências de aprovação: o brinde (as peças usam o
-Nosso Abraço da arte vigente, e não os cremes de mãos do PDF), a cesta do kit 0853, a lista de
+Capim-Limão e Necessaire Natal 26 da arte vigente, de 19/11 a 15/12, e não os cremes de mãos do PDF), a cesta do kit 8053, a lista de
 benefícios do Bronze no D16 (o PDF traz só "*Benefícios bronze") e os H1, que o documento não traz.
 O link "Ver todos os benefícios do clube" aponta para o Escritório Virtual.
 

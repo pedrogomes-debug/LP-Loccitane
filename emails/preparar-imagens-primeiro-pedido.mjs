@@ -7,8 +7,9 @@
  *
  * - Capas: fotos das linhas (pasta do WeTransfer "outras-linhas"), 1200x600 para
  *   exibir a 600x300.
- * - Brinde: a arte "Iniciou, ganhou!" (Nosso Abraço) inteira, a 640px de largura
- *   para exibir a 320px.
+ * - Brinde: a arte "Iniciou, ganhou!" de 19/11 a 15/12 (Capim-Limão e Necessaire Natal 26)
+ *   inteira, no tamanho original (1024px), para exibir em largura total a 600px. O nome do
+ *   arquivo muda a cada promoção para o CDN não servir a arte antiga do cache.
  * - Kit inicial: a arte "Sugestão Kit Inicial" com todos os produtos, exibida a 536px.
  *   As fotos avulsas dos quatro produtos (kit-*.jpg) seguem sendo geradas, mas as peças
  *   não as usam mais.
@@ -23,7 +24,7 @@ import path from "node:path";
 
 const ORIGEM = "assets/web";
 const FOTOS = "E:/wetransfer_outras-linhas_2026-10-30_1852 (1)";
-const ARTE_BRINDE = "E:/WhatsApp Image 2026-10-29 at 17.59.19.jpeg";
+const ARTE_BRINDE = "E:/imagens-primeiro-pedido/brinde-iniciou-ganhou-natal-26.png";
 const ARTE_KIT = "E:/imagens-primeiro-pedido/sugestao-kit-inicial.jpg";
 const DESTINO = "emails/assets-primeiro-pedido";
 
@@ -70,7 +71,7 @@ async function gerarCapas() {
 }
 
 async function gerarBrinde() {
-  await jpeg(sharp(ARTE_BRINDE).resize(640), 82).toFile(path.join(DESTINO, "brinde.jpg"));
+  await jpeg(sharp(ARTE_BRINDE).flatten({ background: "#FFFFFF" }), 82).toFile(path.join(DESTINO, "brinde-natal-26.jpg"));
 }
 
 /** A arte tem 651px de largura: sai no tamanho original para exibir a 536px. */

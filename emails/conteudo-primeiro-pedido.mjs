@@ -7,10 +7,11 @@
  * aprovação da marca:
  *   - o título (H1) de cada peça, já que o layout V2 abre com um H1 sob a capa;
  *   - o brinde: o PDF lista cremes de mãos Brésil (mais de R$ 140), mas o brinde vigente
- *     é o da arte "Iniciou, ganhou!" (Nosso Abraço, R$ 264,98), que vale para as peças;
+ *     é o da arte "Iniciou, ganhou!" vigente (Capim-Limão e Necessaire Natal 26, R$ 174,88,
+ *     de 19/11/2026 a 15/12/2026), que vale para as peças;
  *   - a lista de benefícios do nível Bronze, que o PDF deixa como "*Benefícios bronze".
  *
- * Kit inicial: sugestão de cesta de best-sellers (não é obrigatório), código 0853.
+ * Kit inicial: sugestão de cesta de best-sellers (não é obrigatório), código 8053.
  * Brinde: produto grátis que vem automaticamente no primeiro pedido, seja ou não o kit.
  */
 import { config as configBase } from "./conteudo.mjs";
@@ -32,7 +33,7 @@ export const config = {
 export const URL_CTA = "__URL_CTA__";
 
 const NOME = config.tags.nome;
-const CODIGO_KIT = "0853";
+const CODIGO_KIT = "8053";
 
 /** Sugestão de kit inicial: arte com todos os produtos da cesta. */
 const KIT = {
@@ -43,22 +44,26 @@ const KIT = {
   altura: 537
 };
 
+/** Arte da promoção em largura total, como separador de conteúdo. */
 const BRINDE = {
-  tipo: "imagem",
-  arquivo: "brinde.jpg",
-  alt: "Iniciou, ganhou! Faça o seu primeiro pedido e ganhe 1 Sabonete Líquido Corporal Nosso Abraço 200 ml e 1 Deo Colônia Nosso Abraço 75 ml. Seus brindes valem R$ 264,98",
-  largura: 900,
-  altura: 1600,
-  exibir: 320
+  tipo: "faixa",
+  arquivo: "brinde-natal-26.jpg",
+  alt: "Iniciou, ganhou! Faça o seu primeiro pedido e ganhe 1 Sabonete Líquido para Mãos Capim-Limão Maracujá 250 ml, 1 Gel Creme Desodorante Corporal Capim-Limão Mate 250 ml e 1 Necessaire Natal 26",
+  largura: 1024,
+  altura: 535
 };
 
-const BRINDE_ITENS = ["1x Sabonete Líquido Corporal Nosso Abraço 200 ml", "1x Deo Colônia Nosso Abraço 75 ml"];
-const BRINDE_VALOR = "R$&nbsp;264,98";
+const BRINDE_ITENS = [
+  "1x Sabonete Líquido para Mãos Capim-Limão Maracujá 250 ml",
+  "1x Gel Creme Desodorante Corporal Capim-Limão Mate 250 ml",
+  "1x Necessaire Natal 26"
+];
+const BRINDE_VALOR = "R$&nbsp;174,88";
 
 const NOTA_BRINDE = {
   tipo: "nota",
   texto:
-    "Promoção exclusiva para novos revendedores que fizerem o primeiro pedido, válida de 29/10/2026 a 18/11/2026 ou enquanto durarem os estoques. Limitado a 1 uso por CPF. Imagens meramente ilustrativas."
+    "Promoção exclusiva para novos revendedores que fizerem o primeiro pedido, válida de 19/11/2026 a 15/12/2026 ou enquanto durarem os estoques. Limitado a 1 uso por CPF. Imagens meramente ilustrativas."
 };
 
 const COMO_PEDIR = [

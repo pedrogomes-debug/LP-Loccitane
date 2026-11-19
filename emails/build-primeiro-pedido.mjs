@@ -113,6 +113,10 @@ const C = {
       `<img src="${IMG_PP}${arquivo}" width="${exibir}" height="${Math.round((exibir * altura) / largura)}" alt="${esc(alt)}" style="display:block;margin:0 auto;width:100%;max-width:${exibir}px;height:auto;border:0;outline:none;text-decoration:none;border-radius:12px;" />`
     ),
 
+  /** Imagem de borda a borda do card (600px), usada como separador de conteúdo. */
+  faixa: ({ arquivo, alt, largura, altura }) =>
+    `<tr><td style="padding:0;font-size:0;line-height:0;"><img src="${IMG_PP}${arquivo}" width="600" height="${Math.round((600 * altura) / largura)}" alt="${esc(alt)}" style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;" /></td></tr>`,
+
   /** Quatro produtos: 4 colunas no desktop, 2x2 no celular (cada par é uma célula .stack). */
   produtos: (itens) => {
     const item = (p, ultimo) => `
@@ -239,6 +243,8 @@ function renderizarBloco(bloco, urlCta, codigo) {
       return C.link(bloco.rotulo, atributo(comUtm(bloco.url, codigo)));
     case "imagem":
       return C.imagem(bloco);
+    case "faixa":
+      return C.faixa(bloco);
     case "produtos":
       return C.produtos(bloco.itens);
     case "niveis":
@@ -424,12 +430,13 @@ ${linhas}
     </table>
 
     <!--<p class="nota"><strong>Brinde (aprovar).</strong> O PDF lista cremes de mãos Brésil e "mais de
-      R$ 140", mas as peças usam o brinde vigente da arte "Iniciou, ganhou!": Sabonete Líquido
-      Corporal Nosso Abraço 200 ml e Deo Colônia Nosso Abraço 75 ml, R$ 264,98. A foto é o recorte
-      dos produtos da arte, e o texto legal dela (validade de 29/10/2026 a 18/11/2026, 1 uso por CPF)
-      entra em letra miúda no fim das peças que mostram o brinde (D0, D4 e D20). Quando a promoção
-      mudar, troque o brinde e a nota em <code>conteudo-primeiro-pedido.mjs</code>.</p>
-    <p class="nota"><strong>Kit inicial (código 0853).</strong> As peças D0, D8 e D20 usam a arte
+      R$ 140", mas as peças usam o brinde vigente da arte "Iniciou, ganhou!": Sabonete Líquido para
+      Mãos Capim-Limão Maracujá 250 ml, Gel Creme Desodorante Corporal Capim-Limão Mate 250 ml e
+      Necessaire Natal 26, R$ 174,88. A arte entra em largura total, como separador, e o texto legal
+      (validade de 19/11/2026 a 15/12/2026, 1 uso por CPF) também entra em letra miúda no fim das
+      peças que mostram o brinde (D0, D4 e D20). Quando a promoção mudar, troque o brinde e a nota
+      em <code>conteudo-primeiro-pedido.mjs</code>.</p>
+    <p class="nota"><strong>Kit inicial (código 8053).</strong> As peças D0, D8 e D20 usam a arte
       "Sugestão Kit Inicial" com todos os produtos da cesta.</p>
     <p class="nota"><strong>Benefícios Bronze (aprovar).</strong> O PDF deixa o D16 como
       "*Benefícios bronze". A lista usada (Domino's, Sem Parar, Buser e Flixbus, CNA e Mondly) é a
